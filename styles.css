@@ -57,6 +57,8 @@
   --s-9: 96px; --s-10: 128px; --s-11: 192px;
 
   --container: 1280px;
+  --head-height: 76px;
+  --slide-h: calc(100dvh - var(--head-height));
   --gutter: clamp(20px, 4vw, 56px);
 }
 
@@ -1193,4 +1195,106 @@ hr { border: 0; height: 1px; background: var(--line); }
   .caps, .sectors, .principios, .team, .process, .benefits, .usecases, .tech-grid, .datos { grid-template-columns: 1fr; }
   .sectors > .sector, .principios > .principio { border-right: 0; border-bottom: 1px solid var(--line); }
   .foot__top { grid-template-columns: 1fr; }
+}
+
+
+/* ============================================================
+   Snap scroll cinematic + morph transitions
+   Aplica solo cuando <body class="is-snap-page">
+   Snap se aplica al <html> via :has() para no romper sticky header
+   ============================================================ */
+html:has(body.is-snap-page) {
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: var(--head-height);
+  scroll-behavior: smooth;
+}
+
+/* Cada slide ocupa exactamente el viewport restante (descontando header sticky) */
+body.is-snap-page main > section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  min-height: var(--slide-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  /* anula padding-block clamp original para que el flexbox controle el espacio */
+  padding-block: clamp(var(--s-7), 4vw, var(--s-9));
+}
+
+/* Hero sin doble centering ya viene flexbox propio */
+body.is-snap-page .hero { padding-block: 0; }
+
+/* Footer también snap-aligned, última slide */
+body.is-snap-page .foot {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  min-height: var(--slide-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Si el contenido excede el viewport, scroll interno dentro de la slide */
+body.is-snap-page main > section > .wrap {
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+/* ---- Morph effect: scroll-driven animations (Chrome 115+, Safari 17.4+, Edge 115+) ---- */
+@supports (animation-timeline: view()) {
+  body.is-snap-page main > section {
+    animation: slide-morph linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+  @keyframes slide-morph {
+    0% {
+      opacity: 0;
+      transform: scale(0.94) translateY(48px);
+      filter: blur(6px) saturate(0.85);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      filter: blur(0) saturate(1);
+    }
+  }
+
+  /* Exit con fade-out cuando la slide sale por arriba */
+  body.is-snap-page main > section.morph-exit-enabled {
+    animation: slide-morph-exit linear both;
+    animation-timeline: view();
+    animation-range: exit -20% exit 100%;
+  }
+  @keyframes slide-morph-exit {
+    0%   { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); }
+    100% { opacity: 0.5; transform: scale(0.97) translateY(-24px); filter: blur(4px); }
+  }
+}
+
+/* Fallback para browsers sin scroll-driven animations: aprovechar IntersectionObserver class reveal existente */
+@supports not (animation-timeline: view()) {
+  body.is-snap-page main > section {
+    transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+  }
+}
+
+/* En móviles, snap puede ser frustrante con el direccionado de la address bar — usamos snap proximity en vez de mandatory */
+@media (max-width: 768px) {
+  body.is-snap-page {
+    scroll-snap-type: y proximity;
+  }
+}
+
+/* Respeto prefers-reduced-motion: sin animaciones */
+@media (prefers-reduced-motion: reduce) {
+  body.is-snap-page {
+    scroll-snap-type: none;
+    scroll-behavior: auto;
+  }
+  body.is-snap-page main > section {
+    animation: none;
+  }
 }
