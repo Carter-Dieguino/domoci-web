@@ -1366,3 +1366,127 @@ body.is-snap-page main > section > .wrap::-webkit-scrollbar-thumb { background: 
     animation: none;
   }
 }
+
+
+/* ============================================================
+   COOL LAYER 1 — Mouse parallax (solo desktop hover-capable)
+   JS pone --mx --my en :root (-1 a 1). CSS aplica subtle translate.
+   ============================================================ */
+@media (hover: hover) and (pointer: fine) {
+  body.is-snap-page .hero__visual,
+  body.is-snap-page .hero__bg,
+  body.is-snap-page .hero__grid-bg {
+    transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  body.is-snap-page .hero__visual {
+    transform: translate3d(calc(var(--mx, 0) * 12px), calc(var(--my, 0) * 8px), 0);
+  }
+  body.is-snap-page .hero__bg {
+    transform: translate3d(calc(var(--mx, 0) * -6px), calc(var(--my, 0) * -4px), 0);
+  }
+  body.is-snap-page .hero__grid-bg {
+    transform: translate3d(calc(var(--mx, 0) * -3px), calc(var(--my, 0) * -2px), 0);
+  }
+}
+
+/* ============================================================
+   COOL LAYER 2 — Pin-feel staggered card reveals
+   Cada card en una grilla aparece en secuencia conforme la slide
+   entra al viewport, dando ilusión "Apple-style scrollytelling"
+   sin romper el snap.
+   ============================================================ */
+@supports (animation-timeline: view()) {
+
+  body.is-snap-page .caps > .cap,
+  body.is-snap-page .process > .step,
+  body.is-snap-page .benefits > .benefit,
+  body.is-snap-page .sectors > .sector,
+  body.is-snap-page .principios > .principio,
+  body.is-snap-page .team > *,
+  body.is-snap-page .tech-grid > .tech-item,
+  body.is-snap-page .datos > .dato {
+    opacity: 0;
+    animation: card-stagger-reveal linear both;
+    animation-timeline: view(block);
+    will-change: opacity, transform, filter;
+  }
+
+  @keyframes card-stagger-reveal {
+    0%   { opacity: 0; transform: translateY(56px) scale(0.94); filter: blur(8px); }
+    60%  { opacity: 1; }
+    100% { opacity: 1; transform: translateY(0)    scale(1);    filter: blur(0); }
+  }
+
+  body.is-snap-page .caps > .cap:nth-child(1),
+  body.is-snap-page .process > .step:nth-child(1),
+  body.is-snap-page .benefits > .benefit:nth-child(1),
+  body.is-snap-page .sectors > .sector:nth-child(1),
+  body.is-snap-page .principios > .principio:nth-child(1),
+  body.is-snap-page .team > *:nth-child(1),
+  body.is-snap-page .tech-grid > .tech-item:nth-child(1),
+  body.is-snap-page .datos > .dato:nth-child(1) {
+    animation-range: entry 5% cover 28%;
+  }
+  body.is-snap-page .caps > .cap:nth-child(2),
+  body.is-snap-page .process > .step:nth-child(2),
+  body.is-snap-page .benefits > .benefit:nth-child(2),
+  body.is-snap-page .sectors > .sector:nth-child(2),
+  body.is-snap-page .principios > .principio:nth-child(2),
+  body.is-snap-page .team > *:nth-child(2),
+  body.is-snap-page .tech-grid > .tech-item:nth-child(2),
+  body.is-snap-page .datos > .dato:nth-child(2) {
+    animation-range: entry 12% cover 35%;
+  }
+  body.is-snap-page .caps > .cap:nth-child(3),
+  body.is-snap-page .process > .step:nth-child(3),
+  body.is-snap-page .benefits > .benefit:nth-child(3),
+  body.is-snap-page .sectors > .sector:nth-child(3),
+  body.is-snap-page .principios > .principio:nth-child(3),
+  body.is-snap-page .team > *:nth-child(3),
+  body.is-snap-page .tech-grid > .tech-item:nth-child(3),
+  body.is-snap-page .datos > .dato:nth-child(3) {
+    animation-range: entry 18% cover 42%;
+  }
+  body.is-snap-page .sectors > .sector:nth-child(4),
+  body.is-snap-page .process > .step:nth-child(4),
+  body.is-snap-page .principios > .principio:nth-child(4),
+  body.is-snap-page .team > *:nth-child(4),
+  body.is-snap-page .tech-grid > .tech-item:nth-child(4),
+  body.is-snap-page .datos > .dato:nth-child(4) {
+    animation-range: entry 25% cover 48%;
+  }
+}
+
+@supports not (animation-timeline: view()) {
+  body.is-snap-page .caps > .cap,
+  body.is-snap-page .process > .step,
+  body.is-snap-page .benefits > .benefit,
+  body.is-snap-page .sectors > .sector,
+  body.is-snap-page .principios > .principio,
+  body.is-snap-page .team > *,
+  body.is-snap-page .tech-grid > .tech-item,
+  body.is-snap-page .datos > .dato {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.is-snap-page .caps > .cap,
+  body.is-snap-page .process > .step,
+  body.is-snap-page .benefits > .benefit,
+  body.is-snap-page .sectors > .sector,
+  body.is-snap-page .principios > .principio,
+  body.is-snap-page .team > *,
+  body.is-snap-page .tech-grid > .tech-item,
+  body.is-snap-page .datos > .dato {
+    opacity: 1;
+    animation: none;
+  }
+  body.is-snap-page .hero__visual,
+  body.is-snap-page .hero__bg,
+  body.is-snap-page .hero__grid-bg {
+    transform: none;
+  }
+}
