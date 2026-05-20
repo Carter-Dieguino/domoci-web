@@ -1,0 +1,27 @@
+# Cloudflare Pages — security headers
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+
+# Cache estático aggressive (assets inmutables, hash en filename sería ideal pero por ahora basta long max-age)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/favicon-*.png
+  Cache-Control: public, max-age=2592000
+
+/og-default.jpg
+  Cache-Control: public, max-age=2592000
+
+# robots.txt y sitemap.xml — crawlers leen frecuente, cache corto
+/robots.txt
+  Cache-Control: public, max-age=3600
+
+/sitemap.xml
+  Cache-Control: public, max-age=3600
