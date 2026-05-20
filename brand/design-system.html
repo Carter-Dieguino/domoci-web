@@ -1,0 +1,956 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<title>DOMO — Design System v 2.0 · Engineering Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,0..100&family=JetBrains+Mono:wght@300..700&family=Manrope:wght@300..700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --g-50:#F0F8F3; --g-100:#DDEAE2; --g-200:#B5D2C3; --g-300:#80B196; --g-400:#4A8A6A;
+  --g-500:#226842; --g-600:#0F5132; --g-700:#082F1E; --g-800:#061E14; --g-900:#04110A;
+  --n-50:#FBF8F0; --n-100:#F2EDDD; --n-200:#E5DDC5; --n-300:#C9BD9D; --n-400:#948863;
+  --n-500:#6B6244; --n-600:#4D472F; --n-700:#2B2818; --n-800:#18170D; --n-900:#0B0A05;
+  --b-300:#D9AC6F; --b-500:#A06B33; --b-700:#6B4423;
+
+  --bg: var(--n-50); --bg-elev:#FFF; --surface: var(--n-100); --fg: var(--n-800);
+  --fg-soft: var(--n-600); --fg-muted: var(--n-500);
+  --brand: var(--g-600); --brand-soft: var(--g-500); --accent: var(--b-500);
+  --line: var(--n-200); --line-strong: var(--n-300);
+
+  --display:"Fraunces",Georgia,serif;
+  --sans:"Manrope",-apple-system,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+
+  --ease-out:cubic-bezier(0.16,1,0.3,1);
+  --ease-soft:cubic-bezier(0.4,0,0.2,1);
+  --dur-2:200ms;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: var(--n-900); --bg-elev: var(--n-800); --surface: var(--n-700);
+    --fg: var(--n-50); --fg-soft: var(--n-200); --fg-muted: var(--n-300);
+    --brand: var(--g-300); --brand-soft: var(--g-400); --accent: var(--b-300);
+    --line: var(--n-700); --line-strong: var(--n-600);
+  }
+}
+[data-theme="dark"] {
+  --bg: var(--n-900); --bg-elev: var(--n-800); --surface: var(--n-700);
+  --fg: var(--n-50); --fg-soft: var(--n-200); --fg-muted: var(--n-300);
+  --brand: var(--g-300); --brand-soft: var(--g-400); --accent: var(--b-300);
+  --line: var(--n-700); --line-strong: var(--n-600);
+}
+
+* {box-sizing:border-box;margin:0;padding:0;}
+html {scroll-behavior:smooth;scroll-padding-top:80px;}
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--fg);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing:antialiased;
+  transition: background var(--dur-2) var(--ease-soft), color var(--dur-2) var(--ease-soft);
+}
+a {color:var(--brand); text-decoration:none; transition: color var(--dur-2) var(--ease-soft);}
+a:hover {color:var(--accent);}
+code,pre {font-family: var(--mono);}
+
+/* Layout */
+.shell {display:grid; grid-template-columns: 260px 1fr; min-height:100vh;}
+.side {
+  position:sticky; top:0; height:100vh; overflow-y:auto;
+  background: var(--surface); border-right:1px solid var(--line);
+  padding: 32px 24px;
+}
+.side__brand {
+  font-family: var(--display);
+  font-variation-settings:"opsz" 36,"SOFT" 30;
+  font-size: 22px; font-weight: 500; letter-spacing:-0.01em;
+  display:flex; align-items:center; gap:10px;
+  margin-bottom: 4px;
+}
+.side__sub {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 40px;
+}
+.side__group {margin-bottom: 28px;}
+.side__label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--fg-muted); margin-bottom: 8px;
+  padding-bottom: 6px; border-bottom: 1px solid var(--line);
+}
+.side__link {
+  display: block; padding: 5px 0; font-size: 13px; color: var(--fg-soft);
+  border-left: 2px solid transparent; padding-left: 10px; margin-left: -10px;
+  transition: all var(--dur-2) var(--ease-soft);
+}
+.side__link:hover {color: var(--fg); border-left-color: var(--accent); background: var(--bg);}
+.side__theme {
+  margin-top: auto; padding-top: 24px; border-top: 1px solid var(--line);
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--fg-muted);
+}
+.theme-btn {
+  width: 32px; height: 32px; display:inline-flex; align-items:center; justify-content:center;
+  background: transparent; border: 1px solid var(--line-strong); border-radius: 999px;
+  color: var(--fg); cursor: pointer; transition: all 200ms ease;
+}
+.theme-btn:hover {border-color: var(--brand); color: var(--brand);}
+.theme-btn svg {width:14px;height:14px;}
+.theme-btn .sun{display:none;}
+[data-theme="dark"] .theme-btn .moon{display:none;}
+[data-theme="dark"] .theme-btn .sun{display:block;}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-btn .moon{display:none;}
+  :root:not([data-theme="light"]) .theme-btn .sun{display:block;}
+}
+
+.main {padding: 0;}
+.wrap {max-width: 980px; margin: 0 auto; padding: 64px clamp(20px, 4vw, 56px);}
+
+.sec {padding-block: 80px; border-bottom: 1px solid var(--line);}
+.sec--surface {background: var(--surface);}
+
+.eyebrow {
+  display:inline-flex; align-items:center; gap: 8px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent);
+}
+.eyebrow::before {content:""; width: 18px; height: 1px; background: currentColor;}
+.h1 {
+  font-family: var(--display);
+  font-variation-settings:"opsz" 120,"SOFT" 40;
+  font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 500; letter-spacing: -0.02em; line-height: 1.05;
+  margin-block: 12px 16px;
+}
+.h2 {
+  font-family: var(--display);
+  font-variation-settings:"opsz" 60,"SOFT" 40;
+  font-size: 28px; font-weight: 500; letter-spacing: -0.01em;
+  margin-block: 48px 16px;
+}
+.h3 {
+  font-family: var(--display);
+  font-variation-settings:"opsz" 36,"SOFT" 50;
+  font-size: 20px; font-weight: 500;
+  margin-block: 24px 12px;
+}
+.lead {font-size: 17px; line-height: 1.6; color: var(--fg-soft); max-width: 640px;}
+.body p {margin-bottom: 16px; color: var(--fg-soft); line-height: 1.65;}
+.body strong {color: var(--fg); font-weight: 600;}
+
+/* Code blocks */
+pre {
+  background: var(--n-900); color: var(--n-50);
+  padding: 24px 28px;
+  font-size: 12px; line-height: 1.65;
+  border-radius: 0;
+  overflow-x: auto;
+  border-left: 3px solid var(--accent);
+  margin: 16px 0;
+  position: relative;
+}
+pre .k {color: var(--b-300);}
+pre .s {color: #c8d8c4;}
+pre .c {color: var(--n-400);}
+pre .v {color: #B5D2C3;}
+[data-theme="dark"] pre {background: var(--n-700); border-left-color: var(--accent);}
+
+code:not(pre code) {
+  background: color-mix(in oklab, var(--accent) 14%, transparent);
+  color: var(--accent);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.88em;
+}
+
+/* Token table */
+.token-table {
+  width: 100%; border-collapse: collapse;
+  font-family: var(--mono); font-size: 12px;
+  margin: 16px 0;
+  border: 1px solid var(--line);
+}
+.token-table th, .token-table td {
+  text-align: left; padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+.token-table th {
+  background: var(--surface); color: var(--fg);
+  font-family: var(--mono); font-weight: 600;
+  font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.token-table tr:last-child td {border-bottom: 0;}
+.token-table .chip {
+  display: inline-block; width: 16px; height: 16px;
+  border: 1px solid var(--line-strong); border-radius: 3px;
+  vertical-align: middle; margin-right: 8px;
+}
+.token-table .tok-name {color: var(--brand); font-weight: 500;}
+.token-table .tok-val {color: var(--fg-muted);}
+
+/* Anchor mini */
+.anchor {
+  display:inline-block; padding: 4px 10px;
+  background: var(--surface); border: 1px solid var(--line);
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--fg-muted);
+  border-radius: 999px;
+  margin-right: 6px; margin-bottom: 6px;
+}
+
+/* Component card */
+.comp {
+  background: var(--bg-elev); border: 1px solid var(--line);
+  padding: 32px; margin-block: 24px;
+}
+.comp__demo {
+  padding: 24px; margin-bottom: 20px;
+  background: var(--surface); border: 1px dashed var(--line-strong);
+  display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px;
+}
+.comp__lbl {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--fg-muted);
+  margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--line);
+}
+
+/* Real button/form for demo */
+.btn {
+  font-family: var(--sans); font-weight: 500; font-size: 13px; letter-spacing: 0.02em;
+  padding: 10px 20px; border: 1px solid transparent; border-radius: 4px;
+  cursor: pointer; transition: all var(--dur-2) var(--ease-soft);
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.btn--primary {background: var(--brand); color: var(--n-50); border-color: var(--brand);}
+.btn--primary:hover {background: var(--g-700); border-color: var(--g-700); transform: translateY(-1px);}
+.btn--ghost {background: transparent; color: var(--brand); border-color: var(--brand);}
+.btn--ghost:hover {background: var(--brand); color: var(--n-50);}
+.btn--link {background: transparent; color: var(--brand); padding: 4px 0; border: 0; border-bottom: 1px solid currentColor; border-radius: 0;}
+.btn--link:hover {color: var(--accent);}
+
+.input {
+  font-family: var(--sans); font-size: 14px; width: 100%;
+  padding: 8px 0; border: 0; border-bottom: 1px solid var(--line-strong);
+  background: transparent; color: var(--fg); outline: none;
+  transition: border-color var(--dur-2) var(--ease-soft);
+}
+.input:focus {border-color: var(--brand);}
+
+/* Checklist */
+.check {list-style: none; margin: 16px 0;}
+.check li {
+  padding: 10px 0; border-bottom: 1px solid var(--line);
+  display: grid; grid-template-columns: 28px 1fr; gap: 12px;
+  font-size: 14px; color: var(--fg-soft);
+}
+.check li b {display: block; color: var(--fg); font-weight: 600; margin-bottom: 2px;}
+.check li::before {
+  content: "✓"; color: var(--accent); font-weight: 700; font-family: var(--mono);
+}
+
+/* Note */
+.note {
+  background: color-mix(in oklab, var(--accent) 8%, var(--bg));
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 14px; color: var(--fg-soft); line-height: 1.6;
+}
+.note strong {color: var(--fg); font-weight: 600;}
+
+/* Grid utilities */
+.grid-2 {display: grid; grid-template-columns: 1fr 1fr; gap: 16px;}
+.grid-3 {display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .shell {grid-template-columns: 1fr;}
+  .side {position: relative; height: auto;}
+  .wrap {padding: 40px 20px;}
+  .grid-2, .grid-3 {grid-template-columns: 1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+<!-- SIDE -->
+<aside class="side">
+  <div class="side__brand">DOMO</div>
+  <div class="side__sub">Design System · v 2.0</div>
+
+  <div class="side__group">
+    <div class="side__label">01 · Setup</div>
+    <a class="side__link" href="#intro">Introducción</a>
+    <a class="side__link" href="#stack">Stack y dependencias</a>
+    <a class="side__link" href="#install">Instalación CSS</a>
+  </div>
+  <div class="side__group">
+    <div class="side__label">02 · Tokens</div>
+    <a class="side__link" href="#tok-color">Color</a>
+    <a class="side__link" href="#tok-type">Tipografía</a>
+    <a class="side__link" href="#tok-space">Espaciado</a>
+    <a class="side__link" href="#tok-motion">Movimiento</a>
+    <a class="side__link" href="#tok-theme">Light / Dark</a>
+  </div>
+  <div class="side__group">
+    <div class="side__label">03 · Componentes</div>
+    <a class="side__link" href="#comp-button">Botones</a>
+    <a class="side__link" href="#comp-form">Formularios</a>
+    <a class="side__link" href="#comp-card">Cards / Surface</a>
+    <a class="side__link" href="#comp-rule">Reglas y divisores</a>
+  </div>
+  <div class="side__group">
+    <div class="side__label">04 · Layout</div>
+    <a class="side__link" href="#layout-grid">Grid y containers</a>
+    <a class="side__link" href="#layout-bp">Breakpoints</a>
+  </div>
+  <div class="side__group">
+    <div class="side__label">05 · Producción</div>
+    <a class="side__link" href="#seo">SEO + JSON-LD</a>
+    <a class="side__link" href="#a11y">Accesibilidad</a>
+    <a class="side__link" href="#perf">Performance</a>
+  </div>
+  <div class="side__theme">
+    <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+    </button>
+    <span>Cambiar tema</span>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+
+<!-- ============================================================
+     INTRO
+     ============================================================ -->
+<section class="sec" id="intro">
+  <div class="wrap">
+    <span class="eyebrow">Referencia técnica</span>
+    <h1 class="h1">Design System · Engineering Reference.</h1>
+    <p class="lead">
+      Documentación de implementación de la marca DOMO para developers,
+      front-end engineers y proveedores externos. Para la guía visual y de marca,
+      ver <a href="./brand-book.html"><code>brand-book.html</code></a>.
+    </p>
+
+    <div style="margin-top: 32px;">
+      <span class="anchor">v 2.0</span>
+      <span class="anchor">2026-05-18</span>
+      <span class="anchor">Xalapa · MX</span>
+      <span class="anchor">CSS variables · BEM-light</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STACK
+     ============================================================ -->
+<section class="sec sec--surface" id="stack">
+  <div class="wrap">
+    <span class="eyebrow">01 · Setup</span>
+    <h2 class="h1">Stack y dependencias.</h2>
+
+    <div class="body">
+      <p>El sistema es <strong>framework-agnóstico</strong>. Funciona con HTML estático,
+      Next.js, Astro, Remix o cualquier setup que permita CSS-in-CSS.
+      Cero runtime, cero JS obligatorio (excepto el theme toggle).</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="comp">
+        <div class="comp__lbl">Fonts (Google Fonts)</div>
+        <ul class="check">
+          <li><b>Fraunces</b> Display · variable · opsz 9-144 · wght 400-700 · SOFT 0-100</li>
+          <li><b>Manrope</b> Body / UI · variable · wght 300-700</li>
+          <li><b>JetBrains Mono</b> Code / numbers · wght 300-700</li>
+        </ul>
+      </div>
+      <div class="comp">
+        <div class="comp__lbl">Browser support</div>
+        <ul class="check">
+          <li><b>Safari</b> 15+ (color-mix, oklab)</li>
+          <li><b>Chrome / Edge</b> 111+</li>
+          <li><b>Firefox</b> 113+</li>
+          <li><b>iOS Safari</b> 15.4+</li>
+          <li><b>Android Chrome</b> latest</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="h3">Cargar fonts en <code>&lt;head&gt;</code></h3>
+<pre><span class="k">&lt;link</span> rel=<span class="s">"preconnect"</span> href=<span class="s">"https://fonts.googleapis.com"</span><span class="k">&gt;</span>
+<span class="k">&lt;link</span> rel=<span class="s">"preconnect"</span> href=<span class="s">"https://fonts.gstatic.com"</span> crossorigin<span class="k">&gt;</span>
+<span class="k">&lt;link</span> href=<span class="s">"https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,0..100&amp;family=JetBrains+Mono:wght@300..700&amp;family=Manrope:wght@300..700&amp;display=swap"</span> rel=<span class="s">"stylesheet"</span><span class="k">&gt;</span></pre>
+  </div>
+</section>
+
+<!-- ============================================================
+     INSTALL
+     ============================================================ -->
+<section class="sec" id="install">
+  <div class="wrap">
+    <span class="eyebrow">Instalación</span>
+    <h2 class="h2" style="margin-top: 8px;">CSS base · copia y pega.</h2>
+    <p class="lead">Pega este bloque en tu <code>app.css</code> o <code>global.css</code>.
+    Define la totalidad de tokens, family fonts y semantic mapping con soporte light/dark.</p>
+
+<pre><span class="c">/* ===== DOMO design tokens ===== */</span>
+<span class="k">:root</span> {
+  <span class="c">/* Tonal scales */</span>
+  <span class="v">--g-50</span>:<span class="s">#F0F8F3</span>; <span class="v">--g-100</span>:<span class="s">#DDEAE2</span>; <span class="v">--g-200</span>:<span class="s">#B5D2C3</span>;
+  <span class="v">--g-300</span>:<span class="s">#80B196</span>; <span class="v">--g-400</span>:<span class="s">#4A8A6A</span>; <span class="v">--g-500</span>:<span class="s">#226842</span>;
+  <span class="v">--g-600</span>:<span class="s">#0F5132</span>; <span class="v">--g-700</span>:<span class="s">#082F1E</span>; <span class="v">--g-800</span>:<span class="s">#061E14</span>;
+  <span class="v">--g-900</span>:<span class="s">#04110A</span>;
+
+  <span class="v">--n-50</span>:<span class="s">#FBF8F0</span>; <span class="v">--n-100</span>:<span class="s">#F2EDDD</span>; <span class="v">--n-200</span>:<span class="s">#E5DDC5</span>;
+  <span class="v">--n-300</span>:<span class="s">#C9BD9D</span>; <span class="v">--n-400</span>:<span class="s">#948863</span>; <span class="v">--n-500</span>:<span class="s">#6B6244</span>;
+  <span class="v">--n-600</span>:<span class="s">#4D472F</span>; <span class="v">--n-700</span>:<span class="s">#2B2818</span>; <span class="v">--n-800</span>:<span class="s">#18170D</span>;
+  <span class="v">--n-900</span>:<span class="s">#0B0A05</span>;
+
+  <span class="v">--b-300</span>:<span class="s">#D9AC6F</span>; <span class="v">--b-500</span>:<span class="s">#A06B33</span>; <span class="v">--b-700</span>:<span class="s">#6B4423</span>;
+
+  <span class="c">/* Semantic — Light (default) */</span>
+  <span class="v">--bg</span>:<span class="s">var(--n-50)</span>;
+  <span class="v">--bg-elev</span>:<span class="s">#FFFFFF</span>;
+  <span class="v">--surface</span>:<span class="s">var(--n-100)</span>;
+  <span class="v">--fg</span>:<span class="s">var(--n-800)</span>;
+  <span class="v">--fg-soft</span>:<span class="s">var(--n-600)</span>;
+  <span class="v">--fg-muted</span>:<span class="s">var(--n-500)</span>;
+  <span class="v">--brand</span>:<span class="s">var(--g-600)</span>;
+  <span class="v">--brand-soft</span>:<span class="s">var(--g-500)</span>;
+  <span class="v">--accent</span>:<span class="s">var(--b-500)</span>;
+  <span class="v">--line</span>:<span class="s">var(--n-200)</span>;
+  <span class="v">--line-strong</span>:<span class="s">var(--n-300)</span>;
+
+  <span class="c">/* Type */</span>
+  <span class="v">--display</span>: <span class="s">"Fraunces"</span>, Georgia, serif;
+  <span class="v">--sans</span>: <span class="s">"Manrope"</span>, -apple-system, sans-serif;
+  <span class="v">--mono</span>: <span class="s">"JetBrains Mono"</span>, ui-monospace, monospace;
+
+  <span class="c">/* Motion */</span>
+  <span class="v">--ease-out</span>: cubic-bezier(<span class="s">0.16,1,0.3,1</span>);
+  <span class="v">--ease-soft</span>: cubic-bezier(<span class="s">0.4,0,0.2,1</span>);
+  <span class="v">--dur-2</span>: <span class="s">200ms</span>;
+}
+
+<span class="c">/* Dark via system preference */</span>
+<span class="k">@media</span> (prefers-color-scheme: dark) {
+  <span class="k">:root:not([data-theme=<span class="s">"light"</span>])</span> {
+    <span class="v">--bg</span>: <span class="s">var(--n-900)</span>;
+    <span class="v">--bg-elev</span>: <span class="s">var(--n-800)</span>;
+    <span class="v">--surface</span>: <span class="s">var(--n-700)</span>;
+    <span class="v">--fg</span>: <span class="s">var(--n-50)</span>;
+    <span class="v">--fg-soft</span>: <span class="s">var(--n-200)</span>;
+    <span class="v">--fg-muted</span>: <span class="s">var(--n-300)</span>;
+    <span class="v">--brand</span>: <span class="s">var(--g-300)</span>;
+    <span class="v">--brand-soft</span>: <span class="s">var(--g-400)</span>;
+    <span class="v">--accent</span>: <span class="s">var(--b-300)</span>;
+    <span class="v">--line</span>: <span class="s">var(--n-700)</span>;
+    <span class="v">--line-strong</span>: <span class="s">var(--n-600)</span>;
+  }
+}
+
+<span class="c">/* Manual override */</span>
+<span class="k">[data-theme=<span class="s">"dark"</span>]</span> { <span class="c">/* same dark tokens */</span> }</pre>
+
+    <div class="note">
+      <strong>Por qué <code>:root:not([data-theme="light"])</code></strong> dentro del media query:
+      permite que el sistema decida por default pero que el usuario fuerce light mode con
+      <code>data-theme="light"</code> en <code>&lt;html&gt;</code>. Lo mismo para forzar dark.
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COLOR TOKENS
+     ============================================================ -->
+<section class="sec sec--surface" id="tok-color">
+  <div class="wrap">
+    <span class="eyebrow">02 · Tokens</span>
+    <h2 class="h1">Color.</h2>
+    <p class="lead">Tres familias HSL. Usar siempre el token semántico (<code>--brand</code>, <code>--fg</code>),
+    nunca el token raw (<code>--g-600</code>, <code>--n-800</code>) en componentes — eso rompe el theming.</p>
+
+    <h3 class="h3">Verde institucional · anclado al sello</h3>
+    <table class="token-table">
+      <thead><tr><th>Token</th><th>Hex</th><th>HSL</th><th>Uso</th></tr></thead>
+      <tbody>
+        <tr><td><span class="chip" style="background:#F0F8F3"></span><span class="tok-name">--g-50</span></td><td class="tok-val">#F0F8F3</td><td class="tok-val">146 45 95</td><td>Lightest tint · backgrounds rare</td></tr>
+        <tr><td><span class="chip" style="background:#B5D2C3"></span><span class="tok-name">--g-200</span></td><td class="tok-val">#B5D2C3</td><td class="tok-val">146 38 79</td><td>Soft surfaces · badges</td></tr>
+        <tr><td><span class="chip" style="background:#4A8A6A"></span><span class="tok-name">--g-400</span></td><td class="tok-val">#4A8A6A</td><td class="tok-val">146 30 41</td><td>Brand on dark mode</td></tr>
+        <tr><td><span class="chip" style="background:#226842"></span><span class="tok-name">--g-500</span></td><td class="tok-val">#226842</td><td class="tok-val">146 50 27</td><td>Brand soft · accents</td></tr>
+        <tr><td><span class="chip" style="background:#0F5132"></span><span class="tok-name">--g-600</span></td><td class="tok-val">#0F5132</td><td class="tok-val">146 70 19</td><td><strong style="color:var(--fg)">Brand primary (light)</strong></td></tr>
+        <tr><td><span class="chip" style="background:#082F1E"></span><span class="tok-name">--g-700</span></td><td class="tok-val">#082F1E</td><td class="tok-val">146 75 11</td><td>Brand deep · hover states</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="h3">Sand neutral · paper</h3>
+    <table class="token-table">
+      <thead><tr><th>Token</th><th>Hex</th><th>HSL</th><th>Uso</th></tr></thead>
+      <tbody>
+        <tr><td><span class="chip" style="background:#FBF8F0"></span><span class="tok-name">--n-50</span></td><td class="tok-val">#FBF8F0</td><td class="tok-val">42 56 96</td><td><strong style="color:var(--fg)">--bg (light)</strong></td></tr>
+        <tr><td><span class="chip" style="background:#F2EDDD"></span><span class="tok-name">--n-100</span></td><td class="tok-val">#F2EDDD</td><td class="tok-val">45 49 91</td><td>--surface (light)</td></tr>
+        <tr><td><span class="chip" style="background:#E5DDC5"></span><span class="tok-name">--n-200</span></td><td class="tok-val">#E5DDC5</td><td class="tok-val">42 44 84</td><td>--line (light)</td></tr>
+        <tr><td><span class="chip" style="background:#6B6244"></span><span class="tok-name">--n-500</span></td><td class="tok-val">#6B6244</td><td class="tok-val">42 22 34</td><td>--fg-muted</td></tr>
+        <tr><td><span class="chip" style="background:#18170D"></span><span class="tok-name">--n-800</span></td><td class="tok-val">#18170D</td><td class="tok-val">52 28 8</td><td><strong style="color:var(--fg)">--fg (light)</strong></td></tr>
+        <tr><td><span class="chip" style="background:#0B0A05"></span><span class="tok-name">--n-900</span></td><td class="tok-val">#0B0A05</td><td class="tok-val">45 38 4</td><td><strong style="color:var(--fg)">--bg (dark)</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="h3">Bronze accent · earth</h3>
+    <table class="token-table">
+      <thead><tr><th>Token</th><th>Hex</th><th>HSL</th><th>Uso</th></tr></thead>
+      <tbody>
+        <tr><td><span class="chip" style="background:#D9AC6F"></span><span class="tok-name">--b-300</span></td><td class="tok-val">#D9AC6F</td><td class="tok-val">33 60 64</td><td>Accent en dark mode</td></tr>
+        <tr><td><span class="chip" style="background:#A06B33"></span><span class="tok-name">--b-500</span></td><td class="tok-val">#A06B33</td><td class="tok-val">31 51 41</td><td><strong style="color:var(--fg)">Accent (light)</strong></td></tr>
+        <tr><td><span class="chip" style="background:#6B4423"></span><span class="tok-name">--b-700</span></td><td class="tok-val">#6B4423</td><td class="tok-val">28 50 28</td><td>Accent deep</td></tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <strong>Contraste.</strong> Texto principal sobre cream (<code>--fg</code> over <code>--bg</code>) = 14.6:1 AAA.
+      Texto sobre brand (<code>--n-50</code> over <code>--g-600</code>) = 10.2:1 AAA.
+      Accent sobre cream (<code>--accent</code> over <code>--bg</code>) = 5.8:1 AA Large.
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TYPE TOKENS
+     ============================================================ -->
+<section class="sec" id="tok-type">
+  <div class="wrap">
+    <span class="eyebrow">Tipografía</span>
+    <h2 class="h2" style="margin-top: 8px;">Sistema editorial.</h2>
+
+    <h3 class="h3">Pareo canónico</h3>
+    <table class="token-table">
+      <thead><tr><th>Uso</th><th>Family</th><th>Variation</th><th>Tracking</th></tr></thead>
+      <tbody>
+        <tr><td class="tok-name">Display</td><td>Fraunces</td><td>opsz 120-144 · SOFT 30-60 · wght 400-500</td><td>-0.025em</td></tr>
+        <tr><td class="tok-name">H1-H3</td><td>Fraunces</td><td>opsz 36-72 · SOFT 40 · wght 500</td><td>-0.015em</td></tr>
+        <tr><td class="tok-name">Body</td><td>Manrope</td><td>wght 400</td><td>0</td></tr>
+        <tr><td class="tok-name">Strong</td><td>Manrope</td><td>wght 600</td><td>0</td></tr>
+        <tr><td class="tok-name">Eyebrow</td><td>JetBrains Mono</td><td>wght 500 · UPPERCASE</td><td>0.22em</td></tr>
+        <tr><td class="tok-name">Code</td><td>JetBrains Mono</td><td>wght 400</td><td>0.04em</td></tr>
+      </tbody>
+    </table>
+
+    <h3 class="h3">CSS de aplicación</h3>
+<pre><span class="k">.display-xl</span> {
+  <span class="v">font-family</span>: <span class="s">var(--display)</span>;
+  <span class="v">font-variation-settings</span>: <span class="s">"opsz" 144, "SOFT" 50</span>;
+  <span class="v">font-weight</span>: <span class="s">500</span>;
+  <span class="v">font-size</span>: <span class="s">clamp(64px, 11vw, 168px)</span>;
+  <span class="v">line-height</span>: <span class="s">0.88</span>;
+  <span class="v">letter-spacing</span>: <span class="s">-0.04em</span>;
+}
+
+<span class="k">.h1</span> {
+  <span class="v">font-family</span>: <span class="s">var(--display)</span>;
+  <span class="v">font-variation-settings</span>: <span class="s">"opsz" 96, "SOFT" 50</span>;
+  <span class="v">font-weight</span>: <span class="s">500</span>;
+  <span class="v">font-size</span>: <span class="s">clamp(48px, 6vw, 72px)</span>;
+  <span class="v">line-height</span>: <span class="s">1.05</span>;
+  <span class="v">letter-spacing</span>: <span class="s">-0.02em</span>;
+}
+
+<span class="k">.eyebrow</span> {
+  <span class="v">font-family</span>: <span class="s">var(--mono)</span>;
+  <span class="v">font-size</span>: <span class="s">12px</span>;
+  <span class="v">font-weight</span>: <span class="s">500</span>;
+  <span class="v">letter-spacing</span>: <span class="s">0.22em</span>;
+  <span class="v">text-transform</span>: <span class="s">uppercase</span>;
+  <span class="v">color</span>: <span class="s">var(--accent)</span>;
+}</pre>
+  </div>
+</section>
+
+<!-- ============================================================
+     SPACING + MOTION
+     ============================================================ -->
+<section class="sec sec--surface" id="tok-space">
+  <div class="wrap">
+    <span class="eyebrow">Sistema</span>
+    <h2 class="h2" style="margin-top: 8px;">Espaciado y motion.</h2>
+
+    <div class="grid-2">
+      <div class="comp">
+        <div class="comp__lbl">Escala 8pt</div>
+        <table class="token-table" style="margin:0">
+          <tr><td class="tok-name">--s-1</td><td class="tok-val">4px</td></tr>
+          <tr><td class="tok-name">--s-2</td><td class="tok-val">8px</td></tr>
+          <tr><td class="tok-name">--s-3</td><td class="tok-val">12px</td></tr>
+          <tr><td class="tok-name">--s-4</td><td class="tok-val">16px</td></tr>
+          <tr><td class="tok-name">--s-5</td><td class="tok-val">24px</td></tr>
+          <tr><td class="tok-name">--s-6</td><td class="tok-val">32px</td></tr>
+          <tr><td class="tok-name">--s-7</td><td class="tok-val">48px</td></tr>
+          <tr><td class="tok-name">--s-8</td><td class="tok-val">64px</td></tr>
+          <tr><td class="tok-name">--s-9</td><td class="tok-val">96px</td></tr>
+          <tr><td class="tok-name">--s-10</td><td class="tok-val">128px</td></tr>
+        </table>
+      </div>
+
+      <div class="comp">
+        <div class="comp__lbl">Motion</div>
+        <table class="token-table" style="margin:0">
+          <tr><th>Token</th><th>Valor</th><th>Uso</th></tr>
+          <tr><td class="tok-name">--dur-1</td><td class="tok-val">120ms</td><td>hover</td></tr>
+          <tr><td class="tok-name">--dur-2</td><td class="tok-val">200ms</td><td>botón / link</td></tr>
+          <tr><td class="tok-name">--dur-3</td><td class="tok-val">320ms</td><td>card / modal</td></tr>
+          <tr><td class="tok-name">--dur-4</td><td class="tok-val">520ms</td><td>scroll reveal</td></tr>
+          <tr><td class="tok-name">--dur-5</td><td class="tok-val">840ms</td><td>page enter</td></tr>
+          <tr><td class="tok-name">--ease-out</td><td class="tok-val" colspan="2">0.16, 1, 0.3, 1</td></tr>
+          <tr><td class="tok-name">--ease-soft</td><td class="tok-val" colspan="2">0.4, 0, 0.2, 1</td></tr>
+          <tr><td class="tok-name">--ease-snap</td><td class="tok-val" colspan="2">0.34, 1.56, 0.64, 1</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BUTTONS
+     ============================================================ -->
+<section class="sec" id="comp-button">
+  <div class="wrap">
+    <span class="eyebrow">03 · Componentes</span>
+    <h2 class="h1">Botones.</h2>
+
+    <div class="comp">
+      <div class="comp__lbl">Demo</div>
+      <div class="comp__demo">
+        <button class="btn btn--primary">Agendar diagnóstico</button>
+        <button class="btn btn--ghost">Conocer servicios</button>
+        <button class="btn btn--link">Leer caso completo →</button>
+      </div>
+
+<pre><span class="k">&lt;button</span> class=<span class="s">"btn btn--primary"</span><span class="k">&gt;</span>Agendar diagnóstico<span class="k">&lt;/button&gt;</span>
+<span class="k">&lt;button</span> class=<span class="s">"btn btn--ghost"</span><span class="k">&gt;</span>Conocer servicios<span class="k">&lt;/button&gt;</span>
+<span class="k">&lt;button</span> class=<span class="s">"btn btn--link"</span><span class="k">&gt;</span>Leer caso completo →<span class="k">&lt;/button&gt;</span></pre>
+    </div>
+
+    <h3 class="h3">CSS</h3>
+<pre><span class="k">.btn</span> {
+  <span class="v">font-family</span>: <span class="s">var(--sans)</span>;
+  <span class="v">font-weight</span>: <span class="s">500</span>;
+  <span class="v">font-size</span>: <span class="s">13px</span>;
+  <span class="v">letter-spacing</span>: <span class="s">0.02em</span>;
+  <span class="v">padding</span>: <span class="s">11px 22px</span>;
+  <span class="v">border</span>: <span class="s">1px solid transparent</span>;
+  <span class="v">border-radius</span>: <span class="s">4px</span>;
+  <span class="v">cursor</span>: <span class="s">pointer</span>;
+  <span class="v">display</span>: <span class="s">inline-flex</span>;
+  <span class="v">align-items</span>: <span class="s">center</span>;
+  <span class="v">gap</span>: <span class="s">8px</span>;
+  <span class="v">transition</span>: <span class="s">all var(--dur-2) var(--ease-soft)</span>;
+}
+<span class="k">.btn:focus-visible</span> { <span class="v">outline</span>: <span class="s">2px solid var(--accent)</span>; <span class="v">outline-offset</span>: <span class="s">3px</span>; }
+
+<span class="k">.btn--primary</span> {
+  <span class="v">background</span>: <span class="s">var(--brand)</span>;
+  <span class="v">color</span>: <span class="s">var(--n-50)</span>;
+  <span class="v">border-color</span>: <span class="s">var(--brand)</span>;
+}
+<span class="k">.btn--primary:hover</span> {
+  <span class="v">background</span>: <span class="s">var(--g-700)</span>;
+  <span class="v">transform</span>: <span class="s">translateY(-1px)</span>;
+  <span class="v">box-shadow</span>: <span class="s">0 8px 16px -8px color-mix(in oklab, var(--brand) 60%, transparent)</span>;
+}
+
+<span class="k">.btn--ghost</span> {
+  <span class="v">background</span>: <span class="s">transparent</span>;
+  <span class="v">color</span>: <span class="s">var(--brand)</span>;
+  <span class="v">border-color</span>: <span class="s">var(--brand)</span>;
+}
+<span class="k">.btn--ghost:hover</span> { <span class="v">background</span>: <span class="s">var(--brand)</span>; <span class="v">color</span>: <span class="s">var(--n-50)</span>; }
+
+<span class="k">.btn--link</span> {
+  <span class="v">background</span>: <span class="s">transparent</span>;
+  <span class="v">color</span>: <span class="s">var(--brand)</span>;
+  <span class="v">padding</span>: <span class="s">4px 0</span>;
+  <span class="v">border</span>: <span class="s">0</span>;
+  <span class="v">border-bottom</span>: <span class="s">1px solid currentColor</span>;
+  <span class="v">border-radius</span>: <span class="s">0</span>;
+}</pre>
+  </div>
+</section>
+
+<!-- ============================================================
+     FORMS
+     ============================================================ -->
+<section class="sec sec--surface" id="comp-form">
+  <div class="wrap">
+    <span class="eyebrow">Componentes</span>
+    <h2 class="h2" style="margin-top: 8px;">Formularios.</h2>
+
+    <div class="comp">
+      <div class="comp__lbl">Demo</div>
+      <div class="comp__demo" style="display: block;">
+        <div style="margin-bottom: 16px;">
+          <label style="display:block;font-family:var(--mono);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--fg-muted);margin-bottom:4px;font-weight:500">Correo institucional</label>
+          <input class="input" type="email" placeholder="nombre@institucion.gob.mx" />
+        </div>
+        <button class="btn btn--primary">Enviar mensaje</button>
+      </div>
+
+<pre><span class="k">&lt;div</span> class=<span class="s">"field"</span><span class="k">&gt;</span>
+  <span class="k">&lt;label</span> class=<span class="s">"field__label"</span><span class="k">&gt;</span>Correo institucional<span class="k">&lt;/label&gt;</span>
+  <span class="k">&lt;input</span> class=<span class="s">"input"</span> type=<span class="s">"email"</span> placeholder=<span class="s">"nombre@institucion.gob.mx"</span><span class="k">&gt;</span>
+<span class="k">&lt;/div&gt;</span></pre>
+    </div>
+
+    <h3 class="h3">Validación</h3>
+<pre><span class="c">/* Inválido */</span>
+<span class="k">.input[aria-invalid=<span class="s">"true"</span>]</span> { <span class="v">border-color</span>: <span class="s">var(--state-err)</span>; }
+
+<span class="c">/* Válido */</span>
+<span class="k">.input[data-valid=<span class="s">"true"</span>]</span> { <span class="v">border-color</span>: <span class="s">var(--state-ok)</span>; }
+
+<span class="c">/* Disabled */</span>
+<span class="k">.input[disabled]</span> { <span class="v">opacity</span>: <span class="s">0.5</span>; <span class="v">cursor</span>: <span class="s">not-allowed</span>; }</pre>
+  </div>
+</section>
+
+<!-- ============================================================
+     SEO + JSON-LD (CRÍTICO PARA META)
+     ============================================================ -->
+<section class="sec" id="seo">
+  <div class="wrap">
+    <span class="eyebrow">05 · Producción</span>
+    <h2 class="h1">SEO y JSON-LD <span style="font-style: italic; color: var(--accent);">(crítico para Meta)</span>.</h2>
+    <p class="lead">Bloque obligatorio en todas las páginas. Es lo que permite a Meta
+    Business Verification cruzar los datos de DOMO con su registro fiscal en SAT.</p>
+
+    <h3 class="h3"><code>&lt;head&gt;</code> base · todas las páginas</h3>
+<pre><span class="k">&lt;title&gt;</span>DOMO Consultoría Integral S.C. — Decisiones públicas, con método.<span class="k">&lt;/title&gt;</span>
+<span class="k">&lt;meta</span> name=<span class="s">"description"</span> content=<span class="s">"Firma de consultoría veracruzana fundada en 2005. Acompañamos a gobiernos y organizaciones en diagnóstico territorial, política pública y censos masivos."</span><span class="k">&gt;</span>
+<span class="k">&lt;link</span> rel=<span class="s">"canonical"</span> href=<span class="s">"https://www.domoci.com.mx/"</span><span class="k">&gt;</span>
+
+<span class="c">&lt;!-- Open Graph --&gt;</span>
+<span class="k">&lt;meta</span> property=<span class="s">"og:type"</span> content=<span class="s">"website"</span><span class="k">&gt;</span>
+<span class="k">&lt;meta</span> property=<span class="s">"og:site_name"</span> content=<span class="s">"DOMO Consultoría Integral S.C."</span><span class="k">&gt;</span>
+<span class="k">&lt;meta</span> property=<span class="s">"og:title"</span> content=<span class="s">"DOMO Consultoría Integral S.C."</span><span class="k">&gt;</span>
+<span class="k">&lt;meta</span> property=<span class="s">"og:description"</span> content=<span class="s">"Decisiones públicas, con método. Firma veracruzana desde 2005."</span><span class="k">&gt;</span>
+<span class="k">&lt;meta</span> property=<span class="s">"og:url"</span> content=<span class="s">"https://www.domoci.com.mx/"</span><span class="k">&gt;</span>
+<span class="k">&lt;meta</span> property=<span class="s">"og:image"</span> content=<span class="s">"https://www.domoci.com.mx/og-default.jpg"</span><span class="k">&gt;</span>
+<span class="k">&lt;meta</span> property=<span class="s">"og:locale"</span> content=<span class="s">"es_MX"</span><span class="k">&gt;</span>
+
+<span class="c">&lt;!-- Facebook Domain Verification (configurar tras subir) --&gt;</span>
+<span class="k">&lt;meta</span> name=<span class="s">"facebook-domain-verification"</span> content=<span class="s">"<<token-de-meta>>"</span><span class="k">&gt;</span></pre>
+
+    <h3 class="h3">JSON-LD <code>Organization</code></h3>
+<pre><span class="k">&lt;script</span> type=<span class="s">"application/ld+json"</span><span class="k">&gt;</span>
+{
+  <span class="s">"@context"</span>: <span class="s">"https://schema.org"</span>,
+  <span class="s">"@type"</span>: <span class="s">"Organization"</span>,
+  <span class="s">"@id"</span>: <span class="s">"https://www.domoci.com.mx/#organization"</span>,
+  <span class="s">"name"</span>: <span class="s">"DOMO CONSULTORIA INTEGRAL S.C."</span>,
+  <span class="s">"legalName"</span>: <span class="s">"DOMO CONSULTORIA INTEGRAL S.C."</span>,
+  <span class="s">"alternateName"</span>: <span class="s">"DOMO Consultoría Integral"</span>,
+  <span class="s">"url"</span>: <span class="s">"https://www.domoci.com.mx"</span>,
+  <span class="s">"logo"</span>: <span class="s">"https://www.domoci.com.mx/brand/logo-domo.svg"</span>,
+  <span class="s">"image"</span>: <span class="s">"https://www.domoci.com.mx/og-default.jpg"</span>,
+  <span class="s">"foundingDate"</span>: <span class="s">"2005-02-21"</span>,
+  <span class="s">"taxID"</span>: <span class="s">"DCI050221NF8"</span>,
+  <span class="s">"vatID"</span>: <span class="s">"DCI050221NF8"</span>,
+  <span class="s">"address"</span>: {
+    <span class="s">"@type"</span>: <span class="s">"PostalAddress"</span>,
+    <span class="s">"streetAddress"</span>: <span class="s">"Camino a San José 115"</span>,
+    <span class="s">"addressLocality"</span>: <span class="s">"Xalapa"</span>,
+    <span class="s">"addressRegion"</span>: <span class="s">"Veracruz"</span>,
+    <span class="s">"postalCode"</span>: <span class="s">"91098"</span>,
+    <span class="s">"addressCountry"</span>: <span class="s">"MX"</span>
+  },
+  <span class="s">"contactPoint"</span>: [{
+    <span class="s">"@type"</span>: <span class="s">"ContactPoint"</span>,
+    <span class="s">"contactType"</span>: <span class="s">"customer service"</span>,
+    <span class="s">"telephone"</span>: <span class="s">"+52-228-104-4773"</span>,
+    <span class="s">"email"</span>: <span class="s">"contacto@domoci.com.mx"</span>,
+    <span class="s">"areaServed"</span>: <span class="s">"MX"</span>,
+    <span class="s">"availableLanguage"</span>: [<span class="s">"es-MX"</span>]
+  }],
+  <span class="s">"sameAs"</span>: [
+    <span class="s">"https://www.facebook.com/profile.php?id=100063989135676"</span>
+  ],
+  <span class="s">"founder"</span>: [
+    {<span class="s">"@type"</span>: <span class="s">"Person"</span>, <span class="s">"name"</span>: <span class="s">"Víctor Manuel Durán Orozco"</span>},
+    {<span class="s">"@type"</span>: <span class="s">"Person"</span>, <span class="s">"name"</span>: <span class="s">"Fernando Ochoa Martínez"</span>}
+  ],
+  <span class="s">"hasOfferCatalog"</span>: {
+    <span class="s">"@type"</span>: <span class="s">"OfferCatalog"</span>,
+    <span class="s">"name"</span>: <span class="s">"Servicios DOMO"</span>,
+    <span class="s">"itemListElement"</span>: [
+      {<span class="s">"@type"</span>: <span class="s">"Service"</span>, <span class="s">"name"</span>: <span class="s">"Consultoría estratégica gubernamental"</span>},
+      {<span class="s">"@type"</span>: <span class="s">"Service"</span>, <span class="s">"name"</span>: <span class="s">"Diagnóstico territorial"</span>},
+      {<span class="s">"@type"</span>: <span class="s">"Service"</span>, <span class="s">"name"</span>: <span class="s">"Tecnología cívica"</span>},
+      {<span class="s">"@type"</span>: <span class="s">"Service"</span>, <span class="s">"name"</span>: <span class="s">"Agrocolectiva — Censos masivos vía WhatsApp"</span>}
+    ]
+  }
+}
+<span class="k">&lt;/script&gt;</span></pre>
+
+    <div class="note">
+      <strong>Campos críticos para Meta:</strong>
+      <code>name</code>, <code>legalName</code>, <code>taxID</code>, <code>address</code>.
+      Deben hacer <strong>match exacto</strong> con el registro fiscal SAT
+      (sin acentos en "CONSULTORIA", mayúsculas exactas). El RFC visible en
+      el footer cierra el círculo de validación.
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     A11Y
+     ============================================================ -->
+<section class="sec sec--surface" id="a11y">
+  <div class="wrap">
+    <span class="eyebrow">Accesibilidad</span>
+    <h2 class="h2" style="margin-top: 8px;">Checklist WCAG 2.2 AA.</h2>
+
+    <ul class="check">
+      <li><b>Contraste de texto.</b> Body 14.6:1, accent en cream 5.8:1. Verificar en dark mode.</li>
+      <li><b>Focus visible.</b> Todos los elementos interactivos con outline: 2px solid var(--accent); outline-offset: 3px.</li>
+      <li><b>Reduced motion.</b> Envolver animaciones en <code>@media (prefers-reduced-motion: no-preference)</code>.</li>
+      <li><b>Skip link.</b> Primer elemento del body es link "Saltar al contenido principal".</li>
+      <li><b>Heading hierarchy.</b> Una sola h1 por página. No saltar niveles.</li>
+      <li><b>Form labels.</b> Todo input asociado a su label vía <code>for</code> / <code>id</code> o wrapping.</li>
+      <li><b>Alt text.</b> Imágenes informativas con alt descriptivo. Decorativas con <code>alt=""</code>.</li>
+      <li><b>Language.</b> <code>&lt;html lang="es-MX"&gt;</code> obligatorio.</li>
+      <li><b>Color scheme.</b> <code>&lt;meta name="color-scheme" content="light dark"&gt;</code> para que el browser respete el modo.</li>
+    </ul>
+
+<pre><span class="c">/* Respeto a usuarios que prefieren menos movimiento */</span>
+<span class="k">@media</span> (prefers-reduced-motion: reduce) {
+  <span class="k">*</span> {
+    <span class="v">animation-duration</span>: <span class="s">0.01ms</span> !important;
+    <span class="v">animation-iteration-count</span>: <span class="s">1</span> !important;
+    <span class="v">transition-duration</span>: <span class="s">0.01ms</span> !important;
+  }
+}</pre>
+  </div>
+</section>
+
+<!-- ============================================================
+     PERFORMANCE
+     ============================================================ -->
+<section class="sec" id="perf">
+  <div class="wrap">
+    <span class="eyebrow">Performance</span>
+    <h2 class="h2" style="margin-top: 8px;">Presupuesto y prácticas.</h2>
+
+    <ul class="check">
+      <li><b>CSS único.</b> Mantener bajo <code>30 KB</code> minificado (este sistema completo &lt; 18 KB).</li>
+      <li><b>Fuentes.</b> <code>display=swap</code> obligatorio. Preconnect a Google Fonts.</li>
+      <li><b>Imágenes.</b> WebP / AVIF con fallback. Lazy-load en imágenes below-the-fold con <code>loading="lazy"</code>.</li>
+      <li><b>Logo.</b> SVG inline para el logo de header (cero round-trip). PNG para emblema en cards.</li>
+      <li><b>JS.</b> Solo theme toggle y IntersectionObserver para reveals. &lt; 2 KB total. No frameworks en landing.</li>
+      <li><b>Caché.</b> Cache-Control: public, max-age=31536000, immutable para assets versionados.</li>
+      <li><b>CLS.</b> Reservar espacio para imágenes con aspect-ratio. Cero layout shift acumulado.</li>
+      <li><b>Critical CSS.</b> Inline above-the-fold (~6 KB). El resto async.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     RULES (decorations from brand)
+     ============================================================ -->
+<section class="sec sec--surface" id="comp-rule">
+  <div class="wrap">
+    <span class="eyebrow">Componentes</span>
+    <h2 class="h2" style="margin-top: 8px;">Reglas y divisores.</h2>
+    <p class="lead">Implementación del divisor signature de DOMO — doble regla con medallón central.
+    Se usa para cerrar secciones formales, separar capítulos y firmar documentos.</p>
+
+    <div class="comp">
+      <div class="comp__lbl">Demo</div>
+      <div class="comp__demo" style="display: block; padding: 32px 16px;">
+        <div style="display:flex;align-items:center;gap:12px;color:var(--brand);">
+          <span style="flex:1;border-top:1px solid currentColor;border-bottom:1px solid currentColor;height:4px;opacity:0.6"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:currentColor;box-shadow:0 0 0 4px var(--bg), 0 0 0 5px currentColor"></span>
+          <span style="flex:1;border-top:1px solid currentColor;border-bottom:1px solid currentColor;height:4px;opacity:0.6"></span>
+        </div>
+      </div>
+
+<pre><span class="k">.rule</span> {
+  <span class="v">display</span>: <span class="s">flex</span>;
+  <span class="v">align-items</span>: <span class="s">center</span>;
+  <span class="v">gap</span>: <span class="s">12px</span>;
+  <span class="v">margin</span>: <span class="s">48px 0</span>;
+  <span class="v">color</span>: <span class="s">var(--brand)</span>;
+}
+<span class="k">.rule::before</span>, <span class="k">.rule::after</span> {
+  <span class="v">content</span>: <span class="s">""</span>;
+  <span class="v">flex</span>: <span class="s">1</span>;
+  <span class="v">border-top</span>: <span class="s">1px solid currentColor</span>;
+  <span class="v">border-bottom</span>: <span class="s">1px solid currentColor</span>;
+  <span class="v">height</span>: <span class="s">4px</span>;
+  <span class="v">opacity</span>: <span class="s">0.6</span>;
+}
+<span class="k">.rule__dot</span> {
+  <span class="v">width</span>: <span class="s">8px</span>;
+  <span class="v">height</span>: <span class="s">8px</span>;
+  <span class="v">border-radius</span>: <span class="s">50%</span>;
+  <span class="v">background</span>: <span class="s">currentColor</span>;
+  <span class="v">box-shadow</span>: <span class="s">0 0 0 4px var(--bg), 0 0 0 5px currentColor</span>;
+}</pre>
+
+<pre><span class="k">&lt;hr</span> class=<span class="s">"rule"</span><span class="k">&gt;&lt;span</span> class=<span class="s">"rule__dot"</span><span class="k">&gt;&lt;/span&gt;&lt;/hr&gt;</span></pre>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     END
+     ============================================================ -->
+<section class="sec" style="background: var(--n-900); color: var(--n-50); border: 0;">
+  <div class="wrap" style="text-align: center; padding-block: 96px;">
+    <span class="eyebrow" style="color: var(--accent);">— Fin del documento</span>
+    <h2 class="h2" style="color: var(--n-50); margin-top: 16px;">
+      DOMO Design System.
+    </h2>
+    <p class="lead" style="color: rgba(251,248,240,0.6); margin: 16px auto;">
+      Versión 2.0 · 2026-05-18 · Xalapa, Veracruz.
+    </p>
+    <p style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-top: 32px;">
+      DOMO CONSULTORIA INTEGRAL S.C. · RFC DCI050221NF8
+    </p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+  (function() {
+    var btn = document.getElementById('themeToggle');
+    var root = document.documentElement;
+    var stored = localStorage.getItem('domo-theme');
+    if (stored) root.setAttribute('data-theme', stored);
+    btn && btn.addEventListener('click', function() {
+      var current = root.getAttribute('data-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var next;
+      if (!current) next = prefersDark ? 'light' : 'dark';
+      else if (current === 'dark') next = 'light';
+      else next = 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('domo-theme', next);
+    });
+  })();
+</script>
+
+</body>
+</html>

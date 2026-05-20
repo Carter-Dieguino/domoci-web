@@ -1,0 +1,2165 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<title>DOMO — Brand Book v 2.0</title>
+<meta name="description" content="Brand book oficial de DOMO Consultoría Integral S.C." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=JetBrains+Mono:wght@300..700&family=Manrope:wght@200..800&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   DOMO · Design Tokens · HSL tonal scales
+   ============================================================ */
+:root {
+  /* Green scale — anchored to seal */
+  --g-50:  #F0F8F3;
+  --g-100: #DDEAE2;
+  --g-200: #B5D2C3;
+  --g-300: #80B196;
+  --g-400: #4A8A6A;
+  --g-500: #226842;
+  --g-600: #0F5132;
+  --g-700: #082F1E;
+  --g-800: #061E14;
+  --g-900: #04110A;
+
+  /* Warm sand neutrals — paper */
+  --n-50:  #FBF8F0;
+  --n-100: #F2EDDD;
+  --n-200: #E5DDC5;
+  --n-300: #C9BD9D;
+  --n-400: #948863;
+  --n-500: #6B6244;
+  --n-600: #4D472F;
+  --n-700: #2B2818;
+  --n-800: #18170D;
+  --n-900: #0B0A05;
+
+  /* Bronze accent — earth */
+  --b-100: #F0E1C5;
+  --b-300: #D9AC6F;
+  --b-500: #A06B33;
+  --b-700: #6B4423;
+  --b-900: #3A2613;
+
+  /* State */
+  --state-ok:  #226842;
+  --state-err: #9B2D2D;
+
+  /* Semantic — LIGHT mode */
+  --bg:           var(--n-50);
+  --bg-elev:      #FFFFFF;
+  --surface:      var(--n-100);
+  --surface-alt:  var(--n-200);
+  --fg:           var(--n-800);
+  --fg-soft:      var(--n-600);
+  --fg-muted:     var(--n-500);
+  --brand:        var(--g-600);
+  --brand-soft:   var(--g-500);
+  --brand-leaf:   var(--g-400);
+  --brand-fg:     var(--n-50);
+  --accent:       var(--b-500);
+  --accent-soft:  var(--b-300);
+  --line:         var(--n-200);
+  --line-strong:  var(--n-300);
+  --shadow-sm:    0 1px 0 var(--n-200);
+  --shadow-md:    0 1px 0 var(--n-200), 0 12px 28px -16px rgba(43,40,24,0.18);
+  --shadow-lg:    0 1px 0 var(--n-200), 0 30px 60px -24px rgba(43,40,24,0.25);
+
+  /* Type */
+  --display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --sans:    "Manrope", -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono:    "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Motion */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 320ms;
+  --dur-4: 520ms;
+  --dur-5: 840ms;
+
+  /* Scale */
+  --r-0: 0px;
+  --r-1: 2px;
+  --r-2: 4px;
+  --r-pill: 999px;
+
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 24px; --s-6: 32px; --s-7: 48px; --s-8: 64px;
+  --s-9: 96px; --s-10: 128px; --s-11: 192px;
+
+  --container: 1280px;
+  --gutter: clamp(20px, 4vw, 56px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:          var(--n-900);
+    --bg-elev:     var(--n-800);
+    --surface:     var(--n-700);
+    --surface-alt: var(--n-600);
+    --fg:          var(--n-50);
+    --fg-soft:     var(--n-200);
+    --fg-muted:    var(--n-300);
+    --brand:       var(--g-300);
+    --brand-soft:  var(--g-400);
+    --brand-leaf:  var(--g-200);
+    --brand-fg:    var(--g-900);
+    --accent:      var(--b-300);
+    --accent-soft: var(--b-100);
+    --line:        var(--n-700);
+    --line-strong: var(--n-600);
+    --shadow-sm:   0 1px 0 rgba(0,0,0,0.4);
+    --shadow-md:   0 1px 0 rgba(0,0,0,0.4), 0 12px 28px -16px rgba(0,0,0,0.6);
+    --shadow-lg:   0 1px 0 rgba(0,0,0,0.4), 0 30px 60px -24px rgba(0,0,0,0.8);
+  }
+}
+
+[data-theme="dark"] {
+  --bg:          var(--n-900);
+  --bg-elev:     var(--n-800);
+  --surface:     var(--n-700);
+  --surface-alt: var(--n-600);
+  --fg:          var(--n-50);
+  --fg-soft:     var(--n-200);
+  --fg-muted:    var(--n-300);
+  --brand:       var(--g-300);
+  --brand-soft:  var(--g-400);
+  --brand-leaf:  var(--g-200);
+  --brand-fg:    var(--g-900);
+  --accent:      var(--b-300);
+  --accent-soft: var(--b-100);
+  --line:        var(--n-700);
+  --line-strong: var(--n-600);
+  --shadow-sm:   0 1px 0 rgba(0,0,0,0.4);
+  --shadow-md:   0 1px 0 rgba(0,0,0,0.4), 0 12px 28px -16px rgba(0,0,0,0.6);
+  --shadow-lg:   0 1px 0 rgba(0,0,0,0.4), 0 30px 60px -24px rgba(0,0,0,0.8);
+}
+
+/* ============================================================
+   Reset + base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+body {
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--fg);
+  background: var(--bg);
+  transition: background var(--dur-3) var(--ease-soft), color var(--dur-3) var(--ease-soft);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01" on, "cv11" on;
+}
+a { color: var(--brand); text-decoration: none; transition: color var(--dur-2) var(--ease-soft); }
+a:hover { color: var(--accent); }
+img, svg { display: block; max-width: 100%; }
+hr { border: 0; height: 1px; background: var(--line); }
+
+::selection { background: var(--brand); color: var(--brand-fg); }
+
+/* ============================================================
+   Container
+   ============================================================ */
+.wrap { max-width: var(--container); margin: 0 auto; padding-inline: var(--gutter); }
+
+/* ============================================================
+   Header (sticky)
+   ============================================================ */
+.head {
+  position: sticky; top: 0; z-index: 100;
+  background: color-mix(in oklab, var(--bg) 92%, transparent);
+  backdrop-filter: saturate(140%) blur(12px);
+  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.head__row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  height: 72px;
+  gap: var(--s-6);
+}
+.head__brand {
+  display: flex; align-items: center; gap: var(--s-3);
+  font-family: var(--display);
+  font-weight: 500;
+  font-variation-settings: "opsz" 14, "SOFT" 50;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+.head__brand-tag {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  padding: 4px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+}
+.head__nav { display: flex; justify-content: center; gap: var(--s-5); }
+.head__nav a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--fg-soft);
+  position: relative;
+  padding: 6px 0;
+  letter-spacing: 0.01em;
+}
+.head__nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px; background: var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur-3) var(--ease-out);
+}
+.head__nav a:hover { color: var(--fg); }
+.head__nav a:hover::after { transform: scaleX(1); }
+.head__tools { display: flex; align-items: center; gap: var(--s-3); }
+.theme-btn {
+  width: 36px; height: 36px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  color: var(--fg-soft);
+  cursor: pointer;
+  transition: all var(--dur-2) var(--ease-soft);
+}
+.theme-btn:hover { border-color: var(--brand); color: var(--brand); transform: rotate(20deg); }
+.theme-btn svg { width: 16px; height: 16px; }
+.theme-btn .sun { display: none; }
+[data-theme="dark"] .theme-btn .moon { display: none; }
+[data-theme="dark"] .theme-btn .sun { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-btn .moon { display: none; }
+  :root:not([data-theme="light"]) .theme-btn .sun { display: block; }
+}
+
+/* ============================================================
+   Signature divider — double rule with medallion
+   ============================================================ */
+.rule {
+  display: flex; align-items: center; justify-content: center;
+  gap: var(--s-3);
+  margin: var(--s-7) 0;
+  color: var(--brand);
+}
+.rule::before, .rule::after {
+  content: ""; flex: 1;
+  border-top: 1px solid currentColor;
+  border-bottom: 1px solid currentColor;
+  height: 4px;
+  opacity: 0.6;
+}
+.rule__dot {
+  width: 8px; height: 8px; border-radius: 50%; background: currentColor;
+  box-shadow: 0 0 0 4px var(--bg), 0 0 0 5px currentColor;
+}
+.rule--short::before, .rule--short::after { max-width: 64px; }
+
+/* ============================================================
+   Eyebrow / labels
+   ============================================================ */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.eyebrow::before { content: ""; width: 18px; height: 1px; background: var(--accent); }
+.eyebrow--num::before { display: none; }
+.eyebrow--num span { color: var(--fg-muted); }
+
+/* ============================================================
+   Section base
+   ============================================================ */
+.sec {
+  padding-block: clamp(64px, 12vw, var(--s-11));
+  border-bottom: 1px solid var(--line);
+  position: relative;
+}
+.sec--surface { background: var(--surface); }
+.sec--ink { background: var(--n-900); color: var(--n-50); }
+.sec--ink * { --line: rgba(251,248,240,0.12); --line-strong: rgba(251,248,240,0.22); }
+.sec--brand { background: var(--g-700); color: var(--n-50); }
+
+/* Vertical number ruler — signature */
+.sec__rail {
+  position: absolute;
+  top: var(--s-7);
+  left: var(--s-3);
+  display: none;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: var(--fg-muted);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  pointer-events: none;
+}
+@media (min-width: 1100px) {
+  .sec__rail { display: block; }
+}
+.sec__head {
+  max-width: 820px;
+  margin-bottom: var(--s-8);
+}
+.sec__title {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 120, "SOFT" 30;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  margin-block: var(--s-3) var(--s-5);
+}
+.sec__lead {
+  font-size: clamp(17px, 1.4vw, 21px);
+  line-height: 1.55;
+  color: var(--fg-soft);
+  max-width: 640px;
+}
+
+/* ============================================================
+   COVER
+   ============================================================ */
+.cover {
+  min-height: clamp(680px, 92vh, 940px);
+  padding-block: var(--s-9);
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+.cover__bg {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 90% 15%, color-mix(in oklab, var(--brand) 18%, transparent), transparent 70%),
+    radial-gradient(ellipse 60% 40% at 5% 85%, color-mix(in oklab, var(--accent) 12%, transparent), transparent 70%);
+  opacity: 0.85;
+}
+.cover__grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.5;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black, transparent 90%);
+}
+.cover__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: var(--s-8);
+  align-items: center;
+  min-height: inherit;
+}
+.cover__meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: var(--s-7);
+  opacity: 0;
+  animation: reveal 800ms var(--ease-out) 100ms forwards;
+}
+.cover__meta b { color: var(--accent); font-weight: 600; }
+.cover__title {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-weight: 400;
+  font-size: clamp(64px, 11vw, 168px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  color: var(--fg);
+}
+.cover__title em {
+  font-style: italic;
+  font-weight: 300;
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+  color: var(--brand);
+}
+.cover__title .word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(40px);
+  animation: reveal 900ms var(--ease-out) forwards;
+}
+.cover__title .word:nth-child(1) { animation-delay: 200ms; }
+.cover__title .word:nth-child(2) { animation-delay: 320ms; }
+.cover__title .word:nth-child(3) { animation-delay: 440ms; }
+.cover__title .word:nth-child(4) { animation-delay: 560ms; }
+.cover__sub {
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--fg-soft);
+  max-width: 520px;
+  margin-top: var(--s-5);
+  opacity: 0;
+  animation: reveal 800ms var(--ease-out) 800ms forwards;
+}
+.cover__tag {
+  margin-top: var(--s-7);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  opacity: 0;
+  animation: reveal 800ms var(--ease-out) 1000ms forwards;
+}
+.cover__tag span { padding: 6px 12px; border: 1px solid var(--line); border-radius: var(--r-pill); }
+.cover__seal {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: revealSeal 1200ms var(--ease-out) 600ms forwards;
+}
+.cover__seal img {
+  width: 100%;
+  max-width: 440px;
+  filter: drop-shadow(0 24px 48px rgba(0,0,0,0.12));
+}
+[data-theme="dark"] .cover__seal img,
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .cover__seal img { filter: drop-shadow(0 24px 48px rgba(0,0,0,0.5)); }
+}
+
+@keyframes reveal {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes revealSeal {
+  from { opacity: 0; transform: scale(0.85) rotate(-6deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+/* ============================================================
+   TOC / index
+   ============================================================ */
+.toc {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--s-9);
+  align-items: start;
+}
+.toc__title {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 60, "SOFT" 30;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.05;
+}
+.toc__list { list-style: none; counter-reset: tocIdx; }
+.toc__list li {
+  counter-increment: tocIdx;
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  align-items: baseline;
+  gap: var(--s-5);
+  padding-block: var(--s-3);
+  border-top: 1px solid var(--line);
+  transition: background var(--dur-2) var(--ease-soft);
+}
+.toc__list li:last-child { border-bottom: 1px solid var(--line); }
+.toc__list li:hover { background: color-mix(in oklab, var(--surface) 60%, transparent); }
+.toc__list li::before {
+  content: counter(tocIdx, decimal-leading-zero);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.toc__list a {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 24, "SOFT" 40;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+.toc__list a:hover { color: var(--brand); }
+.toc__list .toc__meta {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* ============================================================
+   Foundation
+   ============================================================ */
+.foundation {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--s-9);
+  align-items: start;
+}
+.foundation__copy p {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 18, "SOFT" 100;
+  font-size: clamp(20px, 1.7vw, 26px);
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--fg-soft);
+  margin-bottom: var(--s-5);
+}
+.foundation__copy p strong { color: var(--fg); font-weight: 500; }
+.tagline-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  padding: var(--s-7);
+  position: relative;
+  box-shadow: var(--shadow-md);
+}
+.tagline-card::before {
+  content: "“";
+  position: absolute;
+  top: 12px; left: 20px;
+  font-family: var(--display);
+  font-size: 96px;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.4;
+}
+.tagline-card__main {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 72, "SOFT" 50;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: var(--brand);
+  margin-bottom: var(--s-5);
+}
+.tagline-card__alt {
+  list-style: none;
+  margin-top: var(--s-5);
+  padding-top: var(--s-5);
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: var(--s-3);
+}
+.tagline-card__alt li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--s-3);
+  padding-block: var(--s-2);
+}
+.tagline-card__alt em {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 24, "SOFT" 60;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--fg);
+}
+.tagline-card__alt span {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+/* ============================================================
+   Identity / Logo
+   ============================================================ */
+.logos-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-4);
+  margin-bottom: var(--s-7);
+}
+.logo-tile {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--dur-3) var(--ease-out), box-shadow var(--dur-3) var(--ease-out);
+}
+.logo-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+.logo-tile__plate {
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--s-5);
+}
+.logo-tile__plate img { max-width: 100%; max-height: 100%; transition: transform var(--dur-4) var(--ease-out); }
+.logo-tile:hover .logo-tile__plate img { transform: scale(1.04); }
+.logo-tile--cream .logo-tile__plate { background: var(--n-100); }
+.logo-tile--brand .logo-tile__plate { background: var(--g-700); }
+.logo-tile--ink .logo-tile__plate { background: var(--n-900); }
+.logo-tile__meta {
+  padding: var(--s-3) var(--s-4);
+  border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between; align-items: center;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.logo-tile__meta b { color: var(--fg); font-weight: 600; }
+
+.wm-stage {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--s-4);
+}
+.wm-stage__plate {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  padding: var(--s-9) var(--s-7);
+  display: flex; align-items: center; justify-content: center;
+}
+.wm-stage__plate--dark { background: var(--g-700); color: var(--n-50); }
+.wm {
+  display: inline-flex; flex-direction: column;
+  font-family: var(--display);
+  font-variation-settings: "opsz" 120, "SOFT" 40;
+  font-weight: 500;
+}
+.wm__main { font-size: 88px; letter-spacing: -0.025em; line-height: 1; color: var(--brand); }
+.wm--dark .wm__main { color: var(--n-50); }
+.wm__sub {
+  margin-top: var(--s-3);
+  padding-top: var(--s-2);
+  border-top: 1px solid currentColor;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ============================================================
+   Color
+   ============================================================ */
+.color-scale {
+  display: grid;
+  grid-template-columns: 180px repeat(10, 1fr);
+  gap: 2px;
+  margin-bottom: var(--s-4);
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+.color-scale__label {
+  background: var(--bg-elev);
+  padding: var(--s-4);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.color-scale__label b {
+  display: block;
+  font-family: var(--display);
+  font-variation-settings: "opsz" 24, "SOFT" 50;
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--fg);
+  letter-spacing: -0.005em;
+  margin-bottom: 4px;
+}
+.swatch-cell {
+  aspect-ratio: 1/1.2;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 10px 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: transform var(--dur-2) var(--ease-soft), z-index 0s;
+  position: relative;
+}
+.swatch-cell:hover {
+  transform: scale(1.1);
+  z-index: 2;
+  box-shadow: var(--shadow-lg);
+}
+.swatch-cell__step { opacity: 0.85; }
+.swatch-cell__hex { opacity: 0.95; font-size: 9px; }
+.swatch-cell--light { color: var(--n-900); }
+.swatch-cell--dark { color: var(--n-50); }
+
+.semantic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-5);
+}
+.semantic-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  padding: var(--s-6);
+}
+.semantic-card h4 {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 28, "SOFT" 40;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--s-4);
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; gap: var(--s-3);
+}
+.semantic-card h4 svg { width: 18px; height: 18px; color: var(--accent); }
+.tok-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--s-3);
+  padding-block: 8px;
+  border-bottom: 1px dashed var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.tok-row:last-child { border-bottom: 0; }
+.tok-row__chip {
+  width: 22px; height: 22px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-1);
+}
+.tok-row__name { color: var(--fg); letter-spacing: 0.04em; }
+.tok-row__val { color: var(--fg-muted); letter-spacing: 0.04em; }
+
+/* ============================================================
+   Typography
+   ============================================================ */
+.type-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+.type-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  padding: var(--s-7);
+  position: relative;
+  overflow: hidden;
+}
+.type-card__tag {
+  position: absolute; top: var(--s-4); right: var(--s-4);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  padding: 4px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+}
+.type-card__display {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 144, "SOFT" 50;
+  font-weight: 400;
+  font-size: clamp(96px, 14vw, 200px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  color: var(--brand);
+  transition: font-variation-settings var(--dur-4) var(--ease-out);
+  cursor: default;
+}
+.type-card:hover .type-card__display {
+  font-variation-settings: "opsz" 144, "SOFT" 100, "wght" 600;
+}
+.type-card__sans {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: clamp(80px, 12vw, 168px);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  color: var(--brand);
+  transition: font-weight var(--dur-4) var(--ease-out);
+  cursor: default;
+}
+.type-card:hover .type-card__sans { font-weight: 700; }
+.type-card__alpha {
+  margin-top: var(--s-4);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  word-spacing: 4px;
+}
+.type-card__name {
+  margin-top: var(--s-3);
+  font-family: var(--display);
+  font-variation-settings: "opsz" 28, "SOFT" 40;
+  font-size: 22px;
+  font-weight: 500;
+}
+.type-card__role {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 2px;
+}
+
+/* Type scale */
+.scale-table {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  margin-top: var(--s-5);
+}
+.scale-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  align-items: baseline;
+  padding: var(--s-5) var(--s-6);
+  border-bottom: 1px solid var(--line);
+  gap: var(--s-5);
+}
+.scale-row:last-child { border-bottom: 0; }
+.scale-row__meta {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+}
+.scale-row__meta b {
+  display: block;
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+.scale-row__sample {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 60, "SOFT" 40;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--fg);
+}
+.scale-row--sans .scale-row__sample {
+  font-family: var(--sans);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+.scale-row--eyebrow .scale-row__sample {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ============================================================
+   Motion
+   ============================================================ */
+.motion-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-5); }
+.motion-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  padding: var(--s-6);
+}
+.motion-card h4 {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 28, "SOFT" 40;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: var(--s-3);
+}
+.motion-card p {
+  font-size: 14px;
+  color: var(--fg-soft);
+  margin-bottom: var(--s-5);
+  line-height: 1.6;
+}
+.timing-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 80px;
+  align-items: center;
+  padding-block: var(--s-3);
+  border-top: 1px solid var(--line);
+  gap: var(--s-3);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.timing-row b { color: var(--fg); font-weight: 600; letter-spacing: 0.06em; }
+.timing-row__bar {
+  height: 4px;
+  background: var(--line);
+  border-radius: var(--r-pill);
+  position: relative;
+  overflow: hidden;
+}
+.timing-row__fill {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+  background: var(--accent);
+  border-radius: var(--r-pill);
+  animation: fillBar 3s var(--ease-out) infinite;
+}
+.timing-row--out .timing-row__fill { animation-timing-function: var(--ease-out); }
+.timing-row--soft .timing-row__fill { animation-timing-function: var(--ease-soft); }
+.timing-row--snap .timing-row__fill { animation-timing-function: var(--ease-snap); }
+.timing-row--linear .timing-row__fill { animation-timing-function: linear; }
+.timing-row span { color: var(--fg-muted); text-align: right; }
+@keyframes fillBar {
+  0%   { width: 0; }
+  40%  { width: 100%; }
+  60%  { width: 100%; }
+  100% { width: 100%; opacity: 0; }
+}
+
+.dur-scale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.dur-row {
+  display: grid;
+  grid-template-columns: 56px 80px 1fr;
+  align-items: center;
+  gap: var(--s-3);
+  font-family: var(--mono);
+  font-size: 12px;
+  padding-block: 6px;
+  border-top: 1px solid var(--line);
+}
+.dur-row b { color: var(--fg); font-weight: 600; letter-spacing: 0.06em; }
+.dur-row__dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--accent);
+  margin-left: auto;
+  animation: pulse 2s var(--ease-soft) infinite;
+}
+.dur-row--1 .dur-row__dot { animation-duration: 0.4s; }
+.dur-row--2 .dur-row__dot { animation-duration: 0.6s; }
+.dur-row--3 .dur-row__dot { animation-duration: 1s; }
+.dur-row--4 .dur-row__dot { animation-duration: 1.4s; }
+.dur-row--5 .dur-row__dot { animation-duration: 2s; }
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(2); opacity: 0.3; }
+}
+
+/* ============================================================
+   Buttons matrix
+   ============================================================ */
+.btn-matrix {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 140px repeat(4, 1fr);
+}
+.btn-matrix__cell {
+  padding: var(--s-5);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+}
+.btn-matrix__cell:last-child { border-right: 0; }
+.btn-matrix__cell--lbl {
+  background: var(--surface);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  font-weight: 500;
+  justify-content: flex-start;
+}
+.btn-matrix__cell--head {
+  background: var(--surface);
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.btn {
+  font-family: var(--sans);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  padding: 11px 22px;
+  border: 1px solid transparent;
+  border-radius: var(--r-2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--dur-2) var(--ease-soft);
+  position: relative;
+}
+.btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+.btn--primary { background: var(--brand); color: var(--brand-fg); border-color: var(--brand); }
+.btn--primary:hover { background: var(--g-700); border-color: var(--g-700); transform: translateY(-1px); box-shadow: 0 8px 16px -8px color-mix(in oklab, var(--brand) 60%, transparent); }
+.btn--primary:active { transform: translateY(0); }
+
+.btn--ghost { background: transparent; color: var(--brand); border-color: var(--brand); }
+.btn--ghost:hover { background: var(--brand); color: var(--brand-fg); }
+
+.btn--soft { background: var(--surface); color: var(--brand); border-color: var(--line); }
+.btn--soft:hover { background: var(--bg-elev); border-color: var(--brand); }
+
+.btn--link {
+  background: transparent;
+  color: var(--brand);
+  padding: 4px 0;
+  border: 0;
+  border-bottom: 1px solid currentColor;
+  border-radius: 0;
+}
+.btn--link:hover { color: var(--accent); }
+
+.btn[disabled], .btn--disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+.btn--loading { color: transparent; pointer-events: none; }
+.btn--loading::after {
+  content: "";
+  position: absolute; inset: 0;
+  display: grid;
+  place-items: center;
+}
+.btn--loading::before {
+  content: "";
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 16px; height: 16px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid currentColor;
+  border-color: var(--brand-fg) transparent var(--brand-fg) transparent;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+.btn--ghost.btn--loading::before { border-color: var(--brand) transparent var(--brand) transparent; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.btn--lg { padding: 16px 30px; font-size: 14px; }
+.btn--sm { padding: 8px 14px; font-size: 12px; }
+
+/* ============================================================
+   Forms
+   ============================================================ */
+.form-stage {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  padding: var(--s-7);
+  max-width: 720px;
+}
+.field { margin-bottom: var(--s-5); position: relative; }
+.field__label {
+  display: block;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  margin-bottom: var(--s-2);
+  font-weight: 500;
+  transition: color var(--dur-2) var(--ease-soft);
+}
+.field:focus-within .field__label { color: var(--accent); }
+.input, .textarea, .select {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 400;
+  width: 100%;
+  padding: 10px 0;
+  border: 0;
+  border-bottom: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--fg);
+  outline: none;
+  transition: border-color var(--dur-2) var(--ease-soft);
+}
+.input::placeholder { color: var(--fg-muted); opacity: 0.6; }
+.input:hover { border-color: var(--fg-muted); }
+.input:focus { border-color: var(--brand); }
+.input[aria-invalid="true"] { border-color: var(--state-err); }
+.input[data-valid="true"] { border-color: var(--state-ok); }
+.input[disabled] { opacity: 0.5; cursor: not-allowed; }
+.field__hint {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+  margin-top: 6px;
+}
+.field__hint--err { color: var(--state-err); }
+.field__hint--ok { color: var(--state-ok); }
+
+/* ============================================================
+   Borders catalog
+   ============================================================ */
+.bord-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-4);
+}
+.bord-card {
+  background: var(--bg-elev);
+  padding: var(--s-6);
+  border: 1px solid var(--line);
+}
+.bord-card__name {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--s-4);
+}
+.bord-card__demo { height: 60px; display: flex; align-items: center; }
+.bord-card__demo > div { width: 100%; }
+.bord-hairline > div { border-top: 1px solid var(--fg); }
+.bord-double > div { border-top: 3px double var(--fg); }
+.bord-dashed > div { border-top: 1px dashed var(--fg); }
+.bord-dotted > div { border-top: 1px dotted var(--fg); }
+.bord-thick  > div { border-top: 2px solid var(--fg); }
+.bord-medall {
+  display: flex; align-items: center; gap: var(--s-3);
+}
+.bord-medall::before, .bord-medall::after {
+  content: ""; flex: 1;
+  border-top: 1px solid var(--fg);
+  border-bottom: 1px solid var(--fg);
+  height: 3px;
+  opacity: 0.7;
+}
+.bord-medall span { width: 8px; height: 8px; border-radius: 50%; background: var(--fg); }
+
+/* ============================================================
+   Surfaces / elevation
+   ============================================================ */
+.elev-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-4); }
+.elev-card {
+  background: var(--bg-elev);
+  padding: var(--s-6);
+  border: 1px solid var(--line);
+  text-align: center;
+  transition: transform var(--dur-3) var(--ease-out);
+}
+.elev-card:hover { transform: translateY(-4px); }
+.elev-card__name { font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-muted); margin-bottom: var(--s-3); }
+.elev-card__demo {
+  height: 88px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  margin-bottom: var(--s-3);
+}
+.elev-1 .elev-card__demo { box-shadow: var(--shadow-sm); }
+.elev-2 .elev-card__demo { box-shadow: var(--shadow-md); }
+.elev-3 .elev-card__demo { box-shadow: var(--shadow-lg); }
+
+/* ============================================================
+   Voice
+   ============================================================ */
+.voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+.voice-col {
+  background: var(--bg-elev);
+  border: 1px solid var(--line);
+  padding: var(--s-6);
+}
+.voice-col__title {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 36, "SOFT" 60;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--s-4);
+  display: flex; align-items: baseline; gap: var(--s-3);
+}
+.voice-col__title em {
+  font-family: var(--mono);
+  font-style: normal;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: var(--r-pill);
+}
+.voice-col--do .voice-col__title em { color: var(--state-ok); border: 1px solid currentColor; }
+.voice-col--dont .voice-col__title em { color: var(--state-err); border: 1px solid currentColor; }
+.voice-col ul { list-style: none; }
+.voice-col li {
+  padding: var(--s-3) 0;
+  border-bottom: 1px dashed var(--line);
+  font-size: 15px;
+  line-height: 1.5;
+  transition: padding-left var(--dur-2) var(--ease-soft);
+}
+.voice-col li:last-child { border-bottom: 0; }
+.voice-col li:hover { padding-left: var(--s-3); }
+.voice-col--do li::before { content: "+"; color: var(--state-ok); font-weight: 600; margin-right: 10px; font-family: var(--mono); }
+.voice-col--dont li::before { content: "×"; color: var(--state-err); font-weight: 600; margin-right: 10px; font-family: var(--mono); }
+
+/* ============================================================
+   Photography
+   ============================================================ */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--s-3);
+}
+.photo {
+  position: relative;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: var(--n-800);
+}
+.photo img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform var(--dur-5) var(--ease-out), filter var(--dur-4) var(--ease-soft);
+}
+.photo:hover img { transform: scale(1.06); }
+.photo--duotone img {
+  filter: grayscale(1) contrast(1.05);
+  mix-blend-mode: luminosity;
+}
+.photo--duotone {
+  background: linear-gradient(180deg, var(--brand) 0%, var(--n-900) 100%);
+}
+.photo--brand img {
+  filter: sepia(0.5) hue-rotate(70deg) saturate(0.85) contrast(1);
+}
+.photo--editorial img { filter: grayscale(0.7) contrast(1.1) brightness(0.95); }
+.photo__cap {
+  position: absolute; left: var(--s-3); bottom: var(--s-3); right: var(--s-3);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(251,248,240,0.92);
+  z-index: 2;
+}
+.photo__num {
+  position: absolute; left: var(--s-3); top: var(--s-3);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: rgba(251,248,240,0.7);
+  z-index: 2;
+}
+.photo--abstract { background: linear-gradient(180deg, #2a2f3a, #0c0f15); }
+.photo--abstract::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 35%, rgba(251,248,240,0.18) 0%, transparent 45%);
+}
+.photo--campo { background: linear-gradient(180deg,#5b7a4a 0%,#283325 60%,var(--g-700) 100%); }
+.photo--territorio { background: linear-gradient(160deg,var(--b-500),var(--n-800)); }
+
+/* ============================================================
+   Identity canonical
+   ============================================================ */
+.identity {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-7);
+  align-items: start;
+  margin-bottom: var(--s-7);
+}
+.identity__panel {
+  background: rgba(251,248,240,0.04);
+  border: 1px solid rgba(251,248,240,0.15);
+  padding: var(--s-7);
+}
+.identity__panel--inline {
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+.id-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  padding-block: var(--s-3);
+  border-bottom: 1px solid rgba(251,248,240,0.15);
+  font-size: 14px;
+}
+.id-row b { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 500; align-self: center; }
+
+.team-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s-5);
+}
+.team-card {
+  font-size: 14px;
+  line-height: 1.5;
+}
+.team-card__name {
+  font-family: var(--display);
+  font-variation-settings: "opsz" 28, "SOFT" 60;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.15;
+  color: var(--n-50);
+}
+.team-card__role {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 8px;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.foot {
+  padding-block: var(--s-7);
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+.foot b { color: var(--fg); }
+
+/* ============================================================
+   Reveal on scroll
+   ============================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 800ms var(--ease-out), transform 800ms var(--ease-out);
+}
+.fade-in.is-visible { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 900px) {
+  .cover__inner { grid-template-columns: 1fr; gap: var(--s-6); }
+  .cover__seal { order: -1; }
+  .cover__seal img { max-width: 240px; }
+  .toc { grid-template-columns: 1fr; gap: var(--s-5); }
+  .color-scale { grid-template-columns: 1fr; }
+  .swatch-cell { aspect-ratio: 5/1; padding: var(--s-3) var(--s-4); flex-direction: row; align-items: center; justify-content: space-between; }
+  .foundation, .semantic-grid, .type-grid, .motion-grid, .voice-grid, .wm-stage, .identity { grid-template-columns: 1fr; }
+  .logos-grid, .photo-grid, .bord-grid, .elev-grid, .team-row { grid-template-columns: repeat(2, 1fr); }
+  .btn-matrix { grid-template-columns: 80px repeat(4, 1fr); font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="head">
+  <div class="wrap head__row">
+    <div class="head__brand">
+      <span>DOMO</span>
+      <span class="head__brand-tag">Brand Book · v 2.0</span>
+    </div>
+    <nav class="head__nav">
+      <a href="#foundation">Fundación</a>
+      <a href="#identity">Identidad</a>
+      <a href="#color">Color</a>
+      <a href="#typography">Tipografía</a>
+      <a href="#motion">Movimiento</a>
+      <a href="#components">Componentes</a>
+      <a href="#voice">Voz</a>
+      <a href="#canonical">Datos</a>
+    </nav>
+    <div class="head__tools">
+      <button class="theme-btn" id="themeToggle" aria-label="Cambiar tema claro/oscuro">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     COVER
+     ============================================================ -->
+<section class="cover">
+  <div class="cover__grid"></div>
+  <div class="cover__bg"></div>
+  <div class="wrap cover__inner">
+    <div>
+      <div class="cover__meta">
+        <span>DOMO · Brand Book · <b>v 2.0</b></span>
+        <span>Documento maestro · 2026-05-18</span>
+        <span>Xalapa, Veracruz · MX</span>
+      </div>
+      <h1 class="cover__title">
+        <span class="word">Decisiones</span>
+        <span class="word">públicas,</span><br>
+        <span class="word"><em>con</em></span>
+        <span class="word"><em>método.</em></span>
+      </h1>
+      <p class="cover__sub">
+        Sistema visual y verbal con el que DOMO Consultoría Integral S.C. regresa
+        al mercado como matriz de Agrocolectiva. Cinco capítulos. Una sola voz.
+      </p>
+      <div class="cover__tag">
+        <span>Fraunces · Manrope</span>
+        <span>Light & Dark nativo</span>
+        <span>Editorial mexicano</span>
+        <span>Tonal HSL</span>
+      </div>
+    </div>
+    <div class="cover__seal">
+      <img src="../assets/domo-logo.jpg" alt="DOMO Consultoría Integral S.C. — emblema oficial" />
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TOC
+     ============================================================ -->
+<section class="sec">
+  <span class="sec__rail">Índice del documento — 09 capítulos</span>
+  <div class="wrap">
+    <div class="toc fade-in">
+      <h2 class="toc__title">En este libro de marca.</h2>
+      <ol class="toc__list">
+        <li><a href="#foundation">Fundación y promesa</a><span class="toc__meta">Misión · Tagline</span></li>
+        <li><a href="#identity">Sistema de marca</a><span class="toc__meta">Emblema · Wordmark</span></li>
+        <li><a href="#color">Color</a><span class="toc__meta">Tonal scale · Tokens</span></li>
+        <li><a href="#typography">Tipografía</a><span class="toc__meta">Fraunces · Manrope</span></li>
+        <li><a href="#motion">Movimiento</a><span class="toc__meta">Easing · Duración</span></li>
+        <li><a href="#components">Componentes UI</a><span class="toc__meta">Botones · Forms · Cards</span></li>
+        <li><a href="#decoration">Bordes y decoración</a><span class="toc__meta">Reglas · Medallones</span></li>
+        <li><a href="#voice">Voz y tono</a><span class="toc__meta">Cómo suena DOMO</span></li>
+        <li><a href="#photography">Fotografía</a><span class="toc__meta">Dirección visual</span></li>
+        <li><a href="#canonical">Identidad legal</a><span class="toc__meta">Razón social · Socios</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     01 FOUNDATION
+     ============================================================ -->
+<section class="sec sec--surface" id="foundation">
+  <span class="sec__rail">01 — Fundación y promesa de marca</span>
+  <div class="wrap">
+    <div class="sec__head fade-in">
+      <span class="eyebrow eyebrow--num"><span>01 ·</span> Fundación</span>
+      <h2 class="sec__title">Lo que <em style="font-style:italic;color:var(--brand)">defendemos</em>.</h2>
+      <p class="sec__lead">
+        DOMO es una firma veracruzana fundada en 2005. Acompaña a quienes
+        diseñan políticas públicas en la traducción de territorio en evidencia,
+        y de evidencia en decisión defendible.
+      </p>
+    </div>
+
+    <div class="foundation fade-in">
+      <div class="foundation__copy">
+        <p>
+          <strong>La consultoría sin método es opinión.</strong>
+          La tecnología sin método es ruido. DOMO existe para mantener al
+          método como el lugar donde lo público y lo técnico se encuentran.
+        </p>
+        <p>
+          Cada hallazgo se demuestra. Cada cifra es auditable. Cada
+          recomendación viene con sus fuentes. Esa es la promesa fundacional,
+          y la que sostendrá todo lo que digamos en este libro.
+        </p>
+      </div>
+      <div class="tagline-card">
+        <div class="eyebrow" style="margin-bottom:var(--s-4)">Tagline principal</div>
+        <div class="tagline-card__main">Decisiones públicas, con método.</div>
+        <ul class="tagline-card__alt">
+          <li><em>Evidencia para gobernar.</em><span>Variante corta</span></li>
+          <li><em>Política pública con rigor.</em><span>Variante extendida</span></li>
+          <li><em>Acompañamos a quienes deciden.</em><span>Línea de respaldo</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     02 IDENTITY
+     ============================================================ -->
+<section class="sec" id="identity">
+  <span class="sec__rail">02 — Sistema de marca · Logo</span>
+  <div class="wrap">
+    <div class="sec__head fade-in">
+      <span class="eyebrow eyebrow--num"><span>02 ·</span> Identidad</span>
+      <h2 class="sec__title">Marca <em style="font-style:italic;color:var(--brand)">primaria</em> y wordmark.</h2>
+      <p class="sec__lead">
+        DOMO opera con un emblema circular registrado desde su constitución
+        en 2005, y un wordmark complementario en serif para contextos
+        digitales donde el sello no puede leerse.
+      </p>
+    </div>
+
+    <div class="logos-grid fade-in">
+      <div class="logo-tile">
+        <div class="logo-tile__plate"><img src="../assets/domo-logo.jpg" alt="Emblema positivo" /></div>
+        <div class="logo-tile__meta"><b>01 · Positivo</b><span>Sobre blanco</span></div>
+      </div>
+      <div class="logo-tile logo-tile--cream">
+        <div class="logo-tile__plate"><img src="../assets/domo-logo.jpg" alt="Emblema sobre crema" /></div>
+        <div class="logo-tile__meta"><b>02 · Sobre crema</b><span>Editorial</span></div>
+      </div>
+      <div class="logo-tile logo-tile--brand">
+        <div class="logo-tile__plate"><img src="../assets/domo-logo.jpg" alt="Emblema sobre verde" style="filter:drop-shadow(0 0 1px rgba(251,248,240,0.6))" /></div>
+        <div class="logo-tile__meta"><b>03 · Sobre brand</b><span>Cierres</span></div>
+      </div>
+      <div class="logo-tile logo-tile--ink">
+        <div class="logo-tile__plate"><img src="../assets/domo-logo.jpg" alt="Emblema sobre ink" style="filter:drop-shadow(0 0 1px rgba(251,248,240,0.6))" /></div>
+        <div class="logo-tile__meta"><b>04 · Sobre ink</b><span>Premium</span></div>
+      </div>
+    </div>
+
+    <div class="wm-stage fade-in">
+      <div class="wm-stage__plate">
+        <div class="wm">
+          <span class="wm__main">DOMO</span>
+          <span class="wm__sub">Consultoría Integral · S.C.</span>
+        </div>
+      </div>
+      <div class="wm-stage__plate wm-stage__plate--dark">
+        <div class="wm wm--dark">
+          <span class="wm__main" style="font-size:56px">DOMO</span>
+          <span class="wm__sub">Consultoría · S.C.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule__dot"></span></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-7);font-size:14px;line-height:1.65;color:var(--fg-soft)">
+      <div>
+        <h4 style="font-family:var(--display);font-variation-settings:'opsz' 28,'SOFT' 40;font-size:22px;font-weight:500;color:var(--fg);margin-bottom:var(--s-3)">Espacio libre</h4>
+        <p>El emblema conserva un área libre alrededor equivalente a 1/4 de su diámetro. Ningún elemento gráfico — ni divisores, ni texto, ni imágenes — invade ese margen.</p>
+      </div>
+      <div>
+        <h4 style="font-family:var(--display);font-variation-settings:'opsz' 28,'SOFT' 40;font-size:22px;font-weight:500;color:var(--fg);margin-bottom:var(--s-3)">Tamaño mínimo</h4>
+        <p>Emblema completo: <code style="font-family:var(--mono);color:var(--accent)">48px</code> de altura mínima. Wordmark: <code style="font-family:var(--mono);color:var(--accent)">28px</code>. Por debajo, se usa la versión sin descriptor.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     03 COLOR
+     ============================================================ -->
+<section class="sec sec--surface" id="color">
+  <span class="sec__rail">03 — Color · Tonal scales y tokens semánticos</span>
+  <div class="wrap">
+    <div class="sec__head fade-in">
+      <span class="eyebrow eyebrow--num"><span>03 ·</span> Color</span>
+      <h2 class="sec__title">Una paleta <em style="font-style:italic;color:var(--brand)">tonal</em>, dos modos.</h2>
+      <p class="sec__lead">
+        Tres familias HSL: verde institucional (anclado al sello), neutrales
+        cálidos (sand paper), bronce earth (acento). Funciona idéntico en
+        modo claro y oscuro mediante tokens semánticos.
+      </p>
+    </div>
+
+    <div class="fade-in" style="margin-bottom:var(--s-7)">
+      <div class="color-scale">
+        <div class="color-scale__label"><b>Green</b>Institucional · Sello</div>
+        <div class="swatch-cell swatch-cell--light" style="background:#F0F8F3"><span class="swatch-cell__step">50</span><span class="swatch-cell__hex">F0F8F3</span></div>
+        <div class="swatch-cell swatch-cell--light" style="background:#DDEAE2"><span class="swatch-cell__step">100</span><span class="swatch-cell__hex">DDEAE2</span></div>
+        <div class="swatch-cell swatch-cell--light" style="background:#B5D2C3"><span class="swatch-cell__step">200</span><span class="swatch-cell__hex">B5D2C3</span></div>
+        <div class="swatch-cell swatch-cell--light" style="background:#80B196"><span class="swatch-cell__step">300</span><span class="swatch-cell__hex">80B196</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#4A8A6A"><span class="swatch-cell__step">400</span><span class="swatch-cell__hex">4A8A6A</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#226842"><span class="swatch-cell__step">500</span><span class="swatch-cell__hex">226842</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#0F5132"><span class="swatch-cell__step">600</span><span class="swatch-cell__hex">0F5132</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#082F1E"><span class="swatch-cell__step">700</span><span class="swatch-cell__hex">082F1E</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#061E14"><span class="swatch-cell__step">800</span><span class="swatch-cell__hex">061E14</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#04110A"><span class="swatch-cell__step">900</span><span class="swatch-cell__hex">04110A</span></div>
+      </div>
+
+      <div class="color-scale">
+        <div class="color-scale__label"><b>Sand</b>Neutral · Paper</div>
+        <div class="swatch-cell swatch-cell--light" style="background:#FBF8F0"><span class="swatch-cell__step">50</span><span class="swatch-cell__hex">FBF8F0</span></div>
+        <div class="swatch-cell swatch-cell--light" style="background:#F2EDDD"><span class="swatch-cell__step">100</span><span class="swatch-cell__hex">F2EDDD</span></div>
+        <div class="swatch-cell swatch-cell--light" style="background:#E5DDC5"><span class="swatch-cell__step">200</span><span class="swatch-cell__hex">E5DDC5</span></div>
+        <div class="swatch-cell swatch-cell--light" style="background:#C9BD9D"><span class="swatch-cell__step">300</span><span class="swatch-cell__hex">C9BD9D</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#948863"><span class="swatch-cell__step">400</span><span class="swatch-cell__hex">948863</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#6B6244"><span class="swatch-cell__step">500</span><span class="swatch-cell__hex">6B6244</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#4D472F"><span class="swatch-cell__step">600</span><span class="swatch-cell__hex">4D472F</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#2B2818"><span class="swatch-cell__step">700</span><span class="swatch-cell__hex">2B2818</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#18170D"><span class="swatch-cell__step">800</span><span class="swatch-cell__hex">18170D</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#0B0A05"><span class="swatch-cell__step">900</span><span class="swatch-cell__hex">0B0A05</span></div>
+      </div>
+
+      <div class="color-scale">
+        <div class="color-scale__label"><b>Bronze</b>Accent · Earth</div>
+        <div class="swatch-cell swatch-cell--light" style="background:#FBF0D7"><span class="swatch-cell__step">50</span><span class="swatch-cell__hex">FBF0D7</span></div>
+        <div class="swatch-cell swatch-cell--light" style="background:#F0E1C5"><span class="swatch-cell__step">100</span><span class="swatch-cell__hex">F0E1C5</span></div>
+        <div class="swatch-cell swatch-cell--light" style="background:#E8CFA3"><span class="swatch-cell__step">200</span><span class="swatch-cell__hex">E8CFA3</span></div>
+        <div class="swatch-cell swatch-cell--light" style="background:#D9AC6F"><span class="swatch-cell__step">300</span><span class="swatch-cell__hex">D9AC6F</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#C18950"><span class="swatch-cell__step">400</span><span class="swatch-cell__hex">C18950</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#A06B33"><span class="swatch-cell__step">500</span><span class="swatch-cell__hex">A06B33</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#7E5325"><span class="swatch-cell__step">600</span><span class="swatch-cell__hex">7E5325</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#6B4423"><span class="swatch-cell__step">700</span><span class="swatch-cell__hex">6B4423</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#52331A"><span class="swatch-cell__step">800</span><span class="swatch-cell__hex">52331A</span></div>
+        <div class="swatch-cell swatch-cell--dark" style="background:#3A2613"><span class="swatch-cell__step">900</span><span class="swatch-cell__hex">3A2613</span></div>
+      </div>
+    </div>
+
+    <div class="rule"><span class="rule__dot"></span></div>
+
+    <h3 style="font-family:var(--display);font-variation-settings:'opsz' 36,'SOFT' 50;font-size:28px;font-weight:500;letter-spacing:-0.01em;margin-bottom:var(--s-5)">Tokens semánticos</h3>
+
+    <div class="semantic-grid fade-in">
+      <div class="semantic-card">
+        <h4>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/></svg>
+          Modo claro
+        </h4>
+        <div class="tok-row"><div class="tok-row__chip" style="background:#FBF8F0"></div><span class="tok-row__name">--bg</span><span class="tok-row__val">sand-50</span></div>
+        <div class="tok-row"><div class="tok-row__chip" style="background:#FFFFFF"></div><span class="tok-row__name">--bg-elev</span><span class="tok-row__val">white</span></div>
+        <div class="tok-row"><div class="tok-row__chip" style="background:#F2EDDD"></div><span class="tok-row__name">--surface</span><span class="tok-row__val">sand-100</span></div>
+        <div class="tok-row"><div class="tok-row__chip" style="background:#18170D"></div><span class="tok-row__name">--fg</span><span class="tok-row__val">sand-800</span></div>
+        <div class="tok-row"><div class="tok-row__chip" style="background:#0F5132"></div><span class="tok-row__name">--brand</span><span class="tok-row__val">green-600</span></div>
+        <div class="tok-row"><div class="tok-row__chip" style="background:#A06B33"></div><span class="tok-row__name">--accent</span><span class="tok-row__val">bronze-500</span></div>
+        <div class="tok-row"><div class="tok-row__chip" style="background:#E5DDC5"></div><span class="tok-row__name">--line</span><span class="tok-row__val">sand-200</span></div>
+      </div>
+      <div class="semantic-card" style="background:#0B0A05;color:var(--n-50);border-color:#2B2818">
+        <h4 style="color:var(--n-50);border-color:#2B2818">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          Modo oscuro
+        </h4>
+        <div class="tok-row" style="border-color:#2B2818;color:var(--n-50)"><div class="tok-row__chip" style="background:#0B0A05"></div><span class="tok-row__name" style="color:var(--n-50)">--bg</span><span class="tok-row__val" style="color:var(--n-300)">sand-900</span></div>
+        <div class="tok-row" style="border-color:#2B2818;color:var(--n-50)"><div class="tok-row__chip" style="background:#18170D"></div><span class="tok-row__name" style="color:var(--n-50)">--bg-elev</span><span class="tok-row__val" style="color:var(--n-300)">sand-800</span></div>
+        <div class="tok-row" style="border-color:#2B2818;color:var(--n-50)"><div class="tok-row__chip" style="background:#2B2818"></div><span class="tok-row__name" style="color:var(--n-50)">--surface</span><span class="tok-row__val" style="color:var(--n-300)">sand-700</span></div>
+        <div class="tok-row" style="border-color:#2B2818;color:var(--n-50)"><div class="tok-row__chip" style="background:#FBF8F0"></div><span class="tok-row__name" style="color:var(--n-50)">--fg</span><span class="tok-row__val" style="color:var(--n-300)">sand-50</span></div>
+        <div class="tok-row" style="border-color:#2B2818;color:var(--n-50)"><div class="tok-row__chip" style="background:#80B196"></div><span class="tok-row__name" style="color:var(--n-50)">--brand</span><span class="tok-row__val" style="color:var(--n-300)">green-300</span></div>
+        <div class="tok-row" style="border-color:#2B2818;color:var(--n-50)"><div class="tok-row__chip" style="background:#D9AC6F"></div><span class="tok-row__name" style="color:var(--n-50)">--accent</span><span class="tok-row__val" style="color:var(--n-300)">bronze-300</span></div>
+        <div class="tok-row" style="border-color:#2B2818;color:var(--n-50)"><div class="tok-row__chip" style="background:#2B2818"></div><span class="tok-row__name" style="color:var(--n-50)">--line</span><span class="tok-row__val" style="color:var(--n-300)">sand-700</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     04 TYPOGRAPHY
+     ============================================================ -->
+<section class="sec" id="typography">
+  <span class="sec__rail">04 — Tipografía · Sistema editorial</span>
+  <div class="wrap">
+    <div class="sec__head fade-in">
+      <span class="eyebrow eyebrow--num"><span>04 ·</span> Tipografía</span>
+      <h2 class="sec__title">Dos voces, <em style="font-style:italic;color:var(--brand)">un</em> sistema.</h2>
+      <p class="sec__lead">
+        Fraunces como display editorial — variable con eje opsz y SOFT que
+        responde al contexto. Manrope como cuerpo y UI — geométrica,
+        neutral, distintamente no-Inter.
+      </p>
+    </div>
+
+    <div class="type-grid fade-in">
+      <div class="type-card">
+        <span class="type-card__tag">Display</span>
+        <div class="type-card__display">Aa</div>
+        <div class="type-card__alpha">A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z<br>1 2 3 4 5 6 7 8 9 0 — , . ¿ ?</div>
+        <div class="type-card__name">Fraunces</div>
+        <div class="type-card__role">Titulares · Editorial · Voz</div>
+      </div>
+      <div class="type-card">
+        <span class="type-card__tag">Body · UI</span>
+        <div class="type-card__sans">Aa</div>
+        <div class="type-card__alpha">A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z<br>1 2 3 4 5 6 7 8 9 0 — , . ¿ ?</div>
+        <div class="type-card__name">Manrope</div>
+        <div class="type-card__role">Cuerpo · UI · Navegación</div>
+      </div>
+    </div>
+
+    <p style="font-size:13px;color:var(--fg-muted);margin-top:var(--s-3);font-family:var(--mono);letter-spacing:0.04em">↑ pasa el cursor sobre las muestras para ver Fraunces ganar peso y Manrope espesar</p>
+
+    <div class="rule rule--short" style="margin-top:var(--s-8)"><span class="rule__dot"></span></div>
+
+    <h3 style="font-family:var(--display);font-variation-settings:'opsz' 36,'SOFT' 50;font-size:28px;font-weight:500;letter-spacing:-0.01em;margin-block:var(--s-7) var(--s-4)">Escala de tipografía</h3>
+
+    <div class="scale-table fade-in">
+      <div class="scale-row">
+        <div class="scale-row__meta"><b>Display XL</b>Fraunces · 500<br>112 / 1.0 / -0.025</div>
+        <div class="scale-row__sample" style="font-size:96px;font-variation-settings:'opsz' 144,'SOFT' 60">Decisiones públicas</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-row__meta"><b>H1</b>Fraunces · 500<br>72 / 1.05 / -0.02</div>
+        <div class="scale-row__sample" style="font-size:60px;font-variation-settings:'opsz' 96,'SOFT' 50">Sección principal</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-row__meta"><b>H2</b>Fraunces · 500<br>48 / 1.1 / -0.015</div>
+        <div class="scale-row__sample" style="font-size:44px;font-variation-settings:'opsz' 60,'SOFT' 40">Encabezado de bloque</div>
+      </div>
+      <div class="scale-row">
+        <div class="scale-row__meta"><b>H3</b>Fraunces · 500<br>32 / 1.15 / -0.01</div>
+        <div class="scale-row__sample" style="font-size:30px;font-variation-settings:'opsz' 36,'SOFT' 40">Subtítulo de sección</div>
+      </div>
+      <div class="scale-row scale-row--sans">
+        <div class="scale-row__meta"><b>Lead</b>Manrope · 400<br>19 / 1.55 / 0</div>
+        <div class="scale-row__sample" style="font-size:19px;color:var(--fg-soft)">Lead. Acompañamos decisiones públicas con método.</div>
+      </div>
+      <div class="scale-row scale-row--sans">
+        <div class="scale-row__meta"><b>Body</b>Manrope · 400<br>16 / 1.6 / 0</div>
+        <div class="scale-row__sample" style="font-size:16px;color:var(--fg-soft)">Cuerpo. La línea base del sitio. Lectura cómoda.</div>
+      </div>
+      <div class="scale-row scale-row--sans">
+        <div class="scale-row__meta"><b>Body sm</b>Manrope · 400<br>14 / 1.55 / 0</div>
+        <div class="scale-row__sample" style="font-size:14px;color:var(--fg-soft)">Auxiliar. Captions, metadata, notas al pie.</div>
+      </div>
+      <div class="scale-row scale-row--eyebrow">
+        <div class="scale-row__meta"><b>Eyebrow</b>JetBrains Mono · 500<br>12 / 1.4 / 0.22em UPPER</div>
+        <div class="scale-row__sample">— Consultoría estratégica</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     05 MOTION
+     ============================================================ -->
+<section class="sec sec--surface" id="motion">
+  <span class="sec__rail">05 — Movimiento · Easing y duración</span>
+  <div class="wrap">
+    <div class="sec__head fade-in">
+      <span class="eyebrow eyebrow--num"><span>05 ·</span> Movimiento</span>
+      <h2 class="sec__title">Movimiento <em style="font-style:italic;color:var(--brand)">deliberado</em>.</h2>
+      <p class="sec__lead">
+        Las animaciones de DOMO son funcionales, no decorativas. Refuerzan
+        jerarquía y guían la atención. Cuatro curvas, cinco duraciones,
+        un principio: rápido entrando, suave saliendo.
+      </p>
+    </div>
+
+    <div class="motion-grid fade-in">
+      <div class="motion-card">
+        <h4>Curvas de aceleración</h4>
+        <p>Cuatro <code style="font-family:var(--mono);color:var(--accent)">cubic-bezier</code> para distintos tipos de transición. Observa las barras animarse abajo.</p>
+        <div class="timing-row timing-row--out"><b>--ease-out</b><div class="timing-row__bar"><div class="timing-row__fill"></div></div><span>0.16, 1, 0.3, 1</span></div>
+        <div class="timing-row timing-row--soft"><b>--ease-soft</b><div class="timing-row__bar"><div class="timing-row__fill"></div></div><span>0.4, 0, 0.2, 1</span></div>
+        <div class="timing-row timing-row--snap"><b>--ease-snap</b><div class="timing-row__bar"><div class="timing-row__fill"></div></div><span>0.34, 1.56, 0.64, 1</span></div>
+        <div class="timing-row timing-row--linear"><b>linear</b><div class="timing-row__bar"><div class="timing-row__fill"></div></div><span>—</span></div>
+      </div>
+      <div class="motion-card">
+        <h4>Escala de duración</h4>
+        <p>Cinco tiempos. Los más cortos son para micro-interacciones; los largos, para entradas y revelaciones.</p>
+        <div class="dur-scale">
+          <div class="dur-row dur-row--1"><b>--dur-1</b><span>120ms</span><span style="color:var(--fg-muted)">hover / focus</span><div class="dur-row__dot"></div></div>
+          <div class="dur-row dur-row--2"><b>--dur-2</b><span>200ms</span><span style="color:var(--fg-muted)">botón / link</span><div class="dur-row__dot"></div></div>
+          <div class="dur-row dur-row--3"><b>--dur-3</b><span>320ms</span><span style="color:var(--fg-muted)">card / modal</span><div class="dur-row__dot"></div></div>
+          <div class="dur-row dur-row--4"><b>--dur-4</b><span>520ms</span><span style="color:var(--fg-muted)">scroll reveal</span><div class="dur-row__dot"></div></div>
+          <div class="dur-row dur-row--5"><b>--dur-5</b><span>840ms</span><span style="color:var(--fg-muted)">page enter</span><div class="dur-row__dot"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     06 COMPONENTS
+     ============================================================ -->
+<section class="sec" id="components">
+  <span class="sec__rail">06 — Biblioteca UI · Botones, formularios, surfaces</span>
+  <div class="wrap">
+    <div class="sec__head fade-in">
+      <span class="eyebrow eyebrow--num"><span>06 ·</span> Componentes</span>
+      <h2 class="sec__title">Construido para <em style="font-style:italic;color:var(--brand)">interacción</em>.</h2>
+      <p class="sec__lead">
+        Botones en cuatro variantes y cinco estados. Inputs con estados
+        de validación. Surfaces con escala de elevación. Todo respetando
+        accesibilidad, foco visible y reducción de movimiento.
+      </p>
+    </div>
+
+    <h3 style="font-family:var(--display);font-variation-settings:'opsz' 36,'SOFT' 50;font-size:28px;font-weight:500;margin-bottom:var(--s-4)">Botones · matriz de estados</h3>
+    <p style="font-size:14px;color:var(--fg-muted);margin-bottom:var(--s-5)">Pasa el cursor sobre cada celda. Foco visible con <code style="font-family:var(--mono);color:var(--accent)">Tab</code>.</p>
+
+    <div class="btn-matrix fade-in">
+      <div class="btn-matrix__cell btn-matrix__cell--lbl">Variante</div>
+      <div class="btn-matrix__cell btn-matrix__cell--head">Default</div>
+      <div class="btn-matrix__cell btn-matrix__cell--head">Disabled</div>
+      <div class="btn-matrix__cell btn-matrix__cell--head">Loading</div>
+      <div class="btn-matrix__cell btn-matrix__cell--head">Pequeño</div>
+
+      <div class="btn-matrix__cell btn-matrix__cell--lbl">Primary</div>
+      <div class="btn-matrix__cell"><button class="btn btn--primary">Agendar diagnóstico</button></div>
+      <div class="btn-matrix__cell"><button class="btn btn--primary" disabled>Agendar diagnóstico</button></div>
+      <div class="btn-matrix__cell"><button class="btn btn--primary btn--loading">Procesando</button></div>
+      <div class="btn-matrix__cell"><button class="btn btn--primary btn--sm">Acción</button></div>
+
+      <div class="btn-matrix__cell btn-matrix__cell--lbl">Ghost</div>
+      <div class="btn-matrix__cell"><button class="btn btn--ghost">Conocer servicios</button></div>
+      <div class="btn-matrix__cell"><button class="btn btn--ghost" disabled>Conocer servicios</button></div>
+      <div class="btn-matrix__cell"><button class="btn btn--ghost btn--loading">Cargando</button></div>
+      <div class="btn-matrix__cell"><button class="btn btn--ghost btn--sm">Acción</button></div>
+
+      <div class="btn-matrix__cell btn-matrix__cell--lbl">Soft</div>
+      <div class="btn-matrix__cell"><button class="btn btn--soft">Más información</button></div>
+      <div class="btn-matrix__cell"><button class="btn btn--soft" disabled>Más información</button></div>
+      <div class="btn-matrix__cell">—</div>
+      <div class="btn-matrix__cell"><button class="btn btn--soft btn--sm">Acción</button></div>
+
+      <div class="btn-matrix__cell btn-matrix__cell--lbl">Link</div>
+      <div class="btn-matrix__cell"><button class="btn btn--link">Leer caso completo →</button></div>
+      <div class="btn-matrix__cell"><button class="btn btn--link" disabled>Leer caso completo →</button></div>
+      <div class="btn-matrix__cell">—</div>
+      <div class="btn-matrix__cell"><button class="btn btn--link" style="font-size:12px">Texto chico →</button></div>
+    </div>
+
+    <div class="rule rule--short" style="margin-block:var(--s-8) var(--s-5)"><span class="rule__dot"></span></div>
+
+    <h3 style="font-family:var(--display);font-variation-settings:'opsz' 36,'SOFT' 50;font-size:28px;font-weight:500;margin-bottom:var(--s-4)">Formulario · estados de input</h3>
+
+    <div class="form-stage fade-in">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--s-5)">
+        <div class="field">
+          <label class="field__label">Idle / Placeholder</label>
+          <input class="input" type="text" placeholder="nombre@institucion.gob.mx" />
+        </div>
+        <div class="field">
+          <label class="field__label">Con contenido</label>
+          <input class="input" type="text" value="Lic. María Fernanda López" />
+        </div>
+        <div class="field">
+          <label class="field__label">Foco (click para ver)</label>
+          <input class="input" type="text" placeholder="Escribe aquí…" />
+        </div>
+        <div class="field">
+          <label class="field__label">Disabled</label>
+          <input class="input" type="text" value="No editable" disabled />
+        </div>
+        <div class="field">
+          <label class="field__label">Validación correcta</label>
+          <input class="input" type="text" value="contacto@dominio.gob.mx" data-valid="true" />
+          <div class="field__hint field__hint--ok">✓ Correo institucional válido</div>
+        </div>
+        <div class="field">
+          <label class="field__label">Validación con error</label>
+          <input class="input" type="text" value="no-es-correo" aria-invalid="true" />
+          <div class="field__hint field__hint--err">× Formato no reconocido</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule rule--short" style="margin-block:var(--s-8) var(--s-5)"><span class="rule__dot"></span></div>
+
+    <h3 style="font-family:var(--display);font-variation-settings:'opsz' 36,'SOFT' 50;font-size:28px;font-weight:500;margin-bottom:var(--s-4)">Surfaces · escala de elevación</h3>
+
+    <div class="elev-grid fade-in">
+      <div class="elev-card elev-1">
+        <div class="elev-card__name">Elev 0 · plano</div>
+        <div class="elev-card__demo" style="box-shadow:none"></div>
+        <code style="font-family:var(--mono);font-size:11px;color:var(--fg-muted)">--shadow: none</code>
+      </div>
+      <div class="elev-card elev-1">
+        <div class="elev-card__name">Elev 1 · hairline</div>
+        <div class="elev-card__demo"></div>
+        <code style="font-family:var(--mono);font-size:11px;color:var(--fg-muted)">--shadow-sm</code>
+      </div>
+      <div class="elev-card elev-2">
+        <div class="elev-card__name">Elev 2 · card</div>
+        <div class="elev-card__demo"></div>
+        <code style="font-family:var(--mono);font-size:11px;color:var(--fg-muted)">--shadow-md</code>
+      </div>
+      <div class="elev-card elev-3">
+        <div class="elev-card__name">Elev 3 · modal</div>
+        <div class="elev-card__demo"></div>
+        <code style="font-family:var(--mono);font-size:11px;color:var(--fg-muted)">--shadow-lg</code>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     07 BORDERS / DECORATION
+     ============================================================ -->
+<section class="sec sec--surface" id="decoration">
+  <span class="sec__rail">07 — Bordes y decoración institucional</span>
+  <div class="wrap">
+    <div class="sec__head fade-in">
+      <span class="eyebrow eyebrow--num"><span>07 ·</span> Decoración</span>
+      <h2 class="sec__title">Catálogo de <em style="font-style:italic;color:var(--brand)">reglas</em>.</h2>
+      <p class="sec__lead">
+        Las reglas en DOMO son institucionales — herencia de la certificación
+        oficial mexicana. Hairlines para hierarchy, dobles reglas para
+        separar, medallones para firmar.
+      </p>
+    </div>
+
+    <div class="bord-grid fade-in">
+      <div class="bord-card">
+        <div class="bord-card__name">01 · Hairline 1px</div>
+        <div class="bord-card__demo bord-hairline"><div></div></div>
+      </div>
+      <div class="bord-card">
+        <div class="bord-card__name">02 · Doble regla 3px</div>
+        <div class="bord-card__demo bord-double"><div></div></div>
+      </div>
+      <div class="bord-card">
+        <div class="bord-card__name">03 · Punteada 1px</div>
+        <div class="bord-card__demo bord-dotted"><div></div></div>
+      </div>
+      <div class="bord-card">
+        <div class="bord-card__name">04 · Dash 1px</div>
+        <div class="bord-card__demo bord-dashed"><div></div></div>
+      </div>
+      <div class="bord-card">
+        <div class="bord-card__name">05 · Solid 2px</div>
+        <div class="bord-card__demo bord-thick"><div></div></div>
+      </div>
+      <div class="bord-card">
+        <div class="bord-card__name">06 · Doble + medallón <span style="color:var(--accent);margin-left:6px">▮ signature</span></div>
+        <div class="bord-card__demo bord-medall" style="color:var(--fg)"><span></span></div>
+      </div>
+    </div>
+
+    <p style="margin-top:var(--s-5);font-size:14px;color:var(--fg-muted);max-width:560px">
+      El divisor <strong style="color:var(--fg);font-weight:500">doble + medallón</strong>
+      es la firma visual de DOMO. Se usa para cerrar secciones formales y se
+      reproduce en footer, headers de capítulo y cierres de documento.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     08 VOICE
+     ============================================================ -->
+<section class="sec" id="voice">
+  <span class="sec__rail">08 — Voz y tono</span>
+  <div class="wrap">
+    <div class="sec__head fade-in">
+      <span class="eyebrow eyebrow--num"><span>08 ·</span> Voz</span>
+      <h2 class="sec__title">Cómo <em style="font-style:italic;color:var(--brand)">suena</em> DOMO.</h2>
+      <p class="sec__lead">
+        Institucional, sobria, técnica accesible. Autoridad sin arrogancia.
+        Frases cortas, datos concretos, cero startup-speak. Si suena bien
+        en boca de un funcionario citándolo en una mesa de trabajo, está
+        bien escrito.
+      </p>
+    </div>
+
+    <div class="voice-grid fade-in">
+      <div class="voice-col voice-col--do">
+        <div class="voice-col__title">Hacemos <em>do</em></div>
+        <ul>
+          <li>Frases cortas, sustantivas.</li>
+          <li>Citamos datos concretos: años, cobertura, ámbito.</li>
+          <li>Verbos en presente afirmativo: acompañamos, documentamos, verificamos.</li>
+          <li>Tutear a equipos. Ustedear a instituciones.</li>
+          <li>Citar la sede en Xalapa cuando refuerza credibilidad regional.</li>
+          <li>Dejar respirar la página con espacio en blanco.</li>
+        </ul>
+      </div>
+      <div class="voice-col voice-col--dont">
+        <div class="voice-col__title">Evitamos <em>don't</em></div>
+        <ul>
+          <li>“Transformación digital”, “soluciones innovadoras”, “sinergias”.</li>
+          <li>Adjetivos vacíos: “robusto”, “ágil”, “disruptivo”.</li>
+          <li>Verbos en gerundio: “impulsando”, “potenciando”.</li>
+          <li>Emojis, exclamaciones, hipérboles tipo startup.</li>
+          <li>Clichés agrarios: “del campo a la mesa”.</li>
+          <li>Promesas absolutas: “garantizamos”, “100% efectivo”.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     09 PHOTOGRAPHY
+     ============================================================ -->
+<section class="sec sec--surface" id="photography">
+  <span class="sec__rail">09 — Fotografía · Tratamientos editoriales</span>
+  <div class="wrap">
+    <div class="sec__head fade-in">
+      <span class="eyebrow eyebrow--num"><span>09 ·</span> Fotografía</span>
+      <h2 class="sec__title">Tratamiento <em style="font-style:italic;color:var(--brand)">editorial</em>.</h2>
+      <p class="sec__lead">
+        La fotografía DOMO es documental editorial: gente real en contexto
+        mexicano, ligeramente desaturada, sin stock. Cuando aparece imagen
+        ajena o vibrante, se trata con duotone o filtro de luminancia para
+        integrarla a la paleta.
+      </p>
+    </div>
+
+    <div class="photo-grid fade-in">
+      <div class="photo photo--editorial">
+        <span class="photo__num">01</span>
+        <img src="../assets/photos/hero-portrait.jpg" alt="Retrato editorial" />
+        <span class="photo__cap">Retrato · grayscale editorial</span>
+      </div>
+      <div class="photo photo--duotone">
+        <span class="photo__num">02</span>
+        <img src="../assets/photos/editorial-abstract.jpg" alt="Tratamiento duotone" />
+        <span class="photo__cap">Duotone · brand · luminance blend</span>
+      </div>
+      <div class="photo photo--brand">
+        <span class="photo__num">03</span>
+        <img src="../assets/photos/editorial-abstract.jpg" alt="Tratamiento brand-tinted" />
+        <span class="photo__cap">Brand-tinted · sepia + hue</span>
+      </div>
+      <div class="photo photo--abstract">
+        <span class="photo__num">04</span>
+        <span class="photo__cap">Retrato corporativo · B/N · luz lateral</span>
+      </div>
+      <div class="photo photo--campo">
+        <span class="photo__num">05</span>
+        <span class="photo__cap">Campo veracruzano · color desaturado</span>
+      </div>
+      <div class="photo photo--territorio">
+        <span class="photo__num">06</span>
+        <span class="photo__cap">Territorio · paisaje regional · cenital</span>
+      </div>
+    </div>
+
+    <p style="margin-top:var(--s-5);font-size:14px;color:var(--fg-muted);max-width:600px">
+      Tile 01: imagen vibrante tratada con grayscale + contrast.
+      Tile 02: misma imagen con duotone verde institucional.
+      Tile 03: tinte sepia + hue rotate hacia brand.
+      Tiles 04-06: placeholders abstractos para cuando no hay foto disponible.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     10 IDENTITY CANONICAL
+     ============================================================ -->
+<section class="sec sec--ink" id="canonical">
+  <span class="sec__rail">10 — Identidad legal · Datos canónicos</span>
+  <div class="wrap">
+    <div class="sec__head fade-in">
+      <span class="eyebrow eyebrow--num" style="color:var(--accent)"><span style="color:rgba(251,248,240,0.5)">10 ·</span> Datos legales</span>
+      <h2 class="sec__title">La razón social, <em style="font-style:italic;color:var(--accent)">en piedra</em>.</h2>
+      <p class="sec__lead" style="color:rgba(251,248,240,0.7)">
+        Estos datos deben aparecer textuales, sin variaciones, en footer
+        legal, aviso de privacidad, JSON-LD y materiales formales.
+      </p>
+    </div>
+
+    <div class="identity fade-in">
+      <div class="identity__panel">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:var(--s-4)">Razón social oficial</div>
+        <div style="font-family:var(--display);font-variation-settings:'opsz' 96,'SOFT' 30;font-size:44px;font-weight:500;line-height:1.05;letter-spacing:-0.02em">DOMO CONSULTORIA<br>INTEGRAL S.C.</div>
+        <div style="font-family:var(--mono);font-size:11px;color:rgba(251,248,240,0.55);margin-top:var(--s-4)">Sin acentos · mayúsculas · match exacto con SAT y registros Meta</div>
+      </div>
+      <div class="identity__panel">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:var(--s-4)">Identificadores</div>
+        <div class="id-row"><b>RFC</b><span style="font-family:var(--mono);font-size:16px">DCI050221NF8</span></div>
+        <div class="id-row"><b>Constituida</b><span>21 de febrero de 2005</span></div>
+        <div class="id-row"><b>Dominio</b><span>www.domoci.com.mx</span></div>
+        <div class="id-row"><b>Sede legal</b><span>Camino a San José 115 · Xalapa, Veracruz · CP 91098 · MX</span></div>
+        <div class="id-row" style="border-bottom:0"><b>Contacto</b><span>contacto@domoci.com.mx · +52 228 104 4773</span></div>
+      </div>
+    </div>
+
+    <div class="rule" style="color:var(--accent)"><span class="rule__dot"></span></div>
+
+    <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);margin-bottom:var(--s-5)">Consejo de socios</div>
+    <div class="team-row fade-in">
+      <div class="team-card">
+        <div class="team-card__name">Víctor Manuel<br>Durán Orozco</div>
+        <div class="team-card__role">Socio fundador<br>Dirección general</div>
+      </div>
+      <div class="team-card">
+        <div class="team-card__name">Fernando Ochoa<br>Martínez</div>
+        <div class="team-card__role">Socio co-fundador<br>Estrategia institucional</div>
+      </div>
+      <div class="team-card">
+        <div class="team-card__name">Diego Armando<br>Hernández Ramos</div>
+        <div class="team-card__role">CTO<br>Socio Agrocolectiva</div>
+      </div>
+      <div class="team-card">
+        <div class="team-card__name">Francisco Javier<br>Vargas Lara</div>
+        <div class="team-card__role">Socio Agrocolectiva<br>Operación y vinculación</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="wrap foot">
+  <span><b>DOMO Brand Book</b> · v 2.0</span>
+  <span>RFC · <b>DCI050221NF8</b></span>
+  <span>2026-05-18 · Xalapa, Veracruz</span>
+</footer>
+
+<!-- ============================================================
+     Scripts
+     ============================================================ -->
+<script>
+  // Theme toggle
+  (function() {
+    var btn = document.getElementById('themeToggle');
+    var root = document.documentElement;
+    var stored = localStorage.getItem('domo-theme');
+    if (stored) root.setAttribute('data-theme', stored);
+    btn.addEventListener('click', function() {
+      var current = root.getAttribute('data-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var next;
+      if (!current) next = prefersDark ? 'light' : 'dark';
+      else if (current === 'dark') next = 'light';
+      else next = 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('domo-theme', next);
+    });
+  })();
+
+  // Scroll reveal
+  (function() {
+    if (!('IntersectionObserver' in window)) return;
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('is-visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -10% 0px' });
+    document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
+  })();
+</script>
+
+</body>
+</html>

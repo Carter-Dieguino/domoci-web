@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<title>Contacto — DOMO Consultoría Integral S.C.</title>
+<meta name="description" content="Camino a San José 115, Xalapa, Veracruz · contacto@domoci.com.mx · +52 228 104 4773" />
+<link rel="canonical" href="https://www.domoci.com.mx/contacto" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Contacto — DOMO Consultoría Integral S.C." />
+<meta property="og:locale" content="es_MX" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,0..100&family=JetBrains+Mono:wght@300..700&family=Manrope:wght@300..700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="./styles.css" />
+<link rel="icon" type="image/x-icon" href="./favicon.ico" />
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
+<link rel="manifest" href="./manifest.webmanifest" />
+<meta name="theme-color" content="#0F5132" />
+<meta property="og:image" content="https://www.domoci.com.mx/og-default.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="DOMO Consultoría Integral S.C. — Decisiones públicas, con método." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://www.domoci.com.mx/og-default.jpg" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">Saltar al contenido principal</a>
+
+<header class="head">
+  <div class="wrap head__row">
+    <a class="head__brand" href="./index.html" aria-label="DOMO — Inicio">
+      <img src="./assets/domo-logo.jpg" alt="" />
+      <span class="head__brand-text">
+        <span class="head__brand-name">DOMO</span>
+        <span class="head__brand-sub">Consultoría · S.C.</span>
+      </span>
+    </a>
+    <nav class="head__nav" aria-label="Navegación principal">
+      <a href="./index.html">Inicio</a>
+      <a href="./nosotros.html">Nosotros</a>
+      <a href="./servicios.html">Servicios</a>
+      <a href="./agrocolectiva.html">Agrocolectiva</a>
+      <a href="./contacto.html" class="is-active">Contacto</a>
+    </nav>
+    <div class="head__tools">
+      <a class="btn-cta" href="#form">Enviar mensaje →</a>
+      <button class="theme-btn" id="themeToggle" aria-label="Cambiar tema">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- Hero sobrio -->
+  <section class="hero hero--center">
+    <div class="hero__bg"></div>
+    <div class="hero__grid-bg"></div>
+    <div class="wrap" style="position: relative;">
+      <div class="hero__inner">
+        <div>
+          <span class="eyebrow reveal reveal--1">Contacto</span>
+          <h1 class="h1 reveal reveal--2"><em>Hablemos.</em></h1>
+          <p class="hero__lead reveal reveal--3">
+            Respondemos en menos de 24 horas hábiles. Para proyectos de gobierno, agendamos diagnóstico inicial sin costo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form + datos -->
+  <section class="sec" id="form">
+    <div class="wrap">
+      <div class="contact-grid fade-in">
+        <!-- Form -->
+        <form id="contact-form" action="/api/contact" method="post" novalidate>
+          <div style="margin-bottom: var(--s-6);">
+            <span class="eyebrow">Formulario de contacto</span>
+            <h2 class="h2" style="margin-top: var(--s-3);">Cuéntanos<br><em>de tu proyecto.</em></h2>
+          </div>
+
+          <!-- Honeypot anti-spam (debe quedar vacío) -->
+          <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+            <label for="f-website">No llenes este campo</label>
+            <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="f-name">Nombre completo</label>
+            <input class="input" id="f-name" name="name" type="text" placeholder="Lic. María Fernanda López" required maxlength="120" />
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-org">Organización</label>
+            <input class="input" id="f-org" name="organization" type="text" placeholder="Secretaría, ayuntamiento, cámara, empresa…" required maxlength="160" />
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-sector">Sector</label>
+            <input class="input" id="f-sector" name="sector" type="text" placeholder="Gobierno estatal / municipal / privado / asociación" maxlength="80" />
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-email">Correo institucional</label>
+            <input class="input" id="f-email" name="email" type="email" placeholder="nombre@institucion.gob.mx" required maxlength="160" />
+          </div>
+          <div class="field">
+            <label class="field__label" for="f-msg">Mensaje</label>
+            <textarea class="textarea" id="f-msg" name="message" placeholder="Describe brevemente el alcance del proyecto, urgencia y tiempos." required maxlength="4000"></textarea>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: var(--s-4); margin-top: var(--s-5); flex-wrap: wrap;">
+            <button class="btn btn--primary" type="submit" id="contact-submit">Enviar mensaje →</button>
+            <span class="form-status" id="contact-status" role="status" aria-live="polite" style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-soft);"></span>
+          </div>
+          <p id="contact-fallback" style="display:none;font-size:13px;color:var(--fg-soft);margin-top:var(--s-4);">
+            Si el envío falla, escríbenos directamente a <a href="mailto:contacto@domoci.com.mx">contacto@domoci.com.mx</a>.
+          </p>
+        </form>
+
+        <!-- Datos -->
+        <div>
+          <div class="rule rule--short" style="margin: 0 0 var(--s-5) 0; justify-content: flex-start;">
+            <span class="rule__dot" style="margin-left: 0;"></span>
+          </div>
+          <span class="eyebrow">Datos institucionales</span>
+          <h3 class="h3" style="margin: var(--s-3) 0 var(--s-5);">DOMO Consultoría Integral S.C.</h3>
+
+          <div class="dato-row"><b>Dirección</b><span>Camino a San José 115<br>Xalapa, Veracruz · CP 91098</span></div>
+          <div class="dato-row"><b>Correo</b><a href="mailto:contacto@domoci.com.mx">contacto@domoci.com.mx</a></div>
+          <div class="dato-row"><b>Teléfono</b><a href="tel:+522281044773">+52 228 104 4773</a></div>
+          <div class="dato-row"><b>RFC</b><span style="font-family: var(--mono);">DCI050221NF8</span></div>
+          <div class="dato-row"><b>Horario</b><span>Lun a Vie · 9:00–18:00 (GMT-6)</span></div>
+
+          <div class="map" aria-label="Mapa de ubicación"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="sec sec--surface">
+    <div class="wrap">
+      <div style="max-width: 720px; margin-bottom: var(--s-7);" class="fade-in">
+        <span class="eyebrow">Preguntas frecuentes</span>
+        <h2 class="h2" style="margin-top: var(--s-3);">Antes de <em>escribirnos.</em></h2>
+      </div>
+
+      <div class="faq fade-in">
+        <div class="faq__item">
+          <span class="faq__num">01</span>
+          <span class="faq__q">¿Trabajan con gobiernos federales o solo estatales y municipales?</span>
+          <span class="faq__arrow">→</span>
+        </div>
+        <div class="faq__item">
+          <span class="faq__num">02</span>
+          <span class="faq__q">¿Cuál es el ámbito geográfico de operación de Agrocolectiva?</span>
+          <span class="faq__arrow">→</span>
+        </div>
+        <div class="faq__item">
+          <span class="faq__num">03</span>
+          <span class="faq__q">¿Pueden firmar acuerdos de confidencialidad antes del primer encuentro?</span>
+          <span class="faq__arrow">→</span>
+        </div>
+        <div class="faq__item">
+          <span class="faq__num">04</span>
+          <span class="faq__q">¿Cómo se factura un proyecto típico de consultoría?</span>
+          <span class="faq__arrow">→</span>
+        </div>
+        <div class="faq__item">
+          <span class="faq__num">05</span>
+          <span class="faq__q">¿Atienden a sector privado fuera de Veracruz?</span>
+          <span class="faq__arrow">→</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <img src="./assets/domo-logo.jpg" alt="DOMO" style="height:56px;width:auto;filter:drop-shadow(0 0 1px rgba(251,248,240,0.4));" />
+        <p class="foot__brand-tag">Firma de consultoría veracruzana fundada en 2005.</p>
+      </div>
+      <div class="foot__col"><h6>Empresa</h6><a href="./nosotros.html">Nosotros</a><a href="./nosotros.html#liderazgo">Liderazgo</a><a href="./nosotros.html#trayectoria">Trayectoria</a></div>
+      <div class="foot__col"><h6>Servicios</h6><a href="./servicios.html#consultoria">Consultoría estratégica</a><a href="./servicios.html#diagnostico">Diagnóstico territorial</a><a href="./servicios.html#tecnologia">Tecnología cívica</a><a href="./agrocolectiva.html">Agrocolectiva</a></div>
+      <div class="foot__col"><h6>Contacto</h6><span>Camino a San José 115</span><span>Xalapa, Ver. · 91098</span><a href="mailto:contacto@domoci.com.mx">contacto@domoci.com.mx</a><a href="tel:+522281044773">+52 228 104 4773</a></div>
+      <div class="foot__col"><h6>Documentos</h6><a href="./brand/brand-book.html">Brand Book</a><a href="./aviso-de-privacidad.html">Aviso de Privacidad</a><a href="./terminos.html">Términos</a></div>
+    </div>
+    <div class="foot__bottom">
+      <span>DOMO CONSULTORIA INTEGRAL S.C. · RFC: DCI050221NF8 · © 2026</span>
+      <span><a href="https://www.facebook.com/profile.php?id=100063989135676">Facebook</a> · <a href="#">LinkedIn</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function() {
+    var btn = document.getElementById('themeToggle'); var root = document.documentElement;
+    var stored = localStorage.getItem('domo-theme');
+    if (stored) root.setAttribute('data-theme', stored);
+    btn && btn.addEventListener('click', function() {
+      var c = root.getAttribute('data-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var n = !c ? (prefersDark ? 'light' : 'dark') : (c === 'dark' ? 'light' : 'dark');
+      root.setAttribute('data-theme', n); localStorage.setItem('domo-theme', n);
+    });
+  })();
+  (function() {
+    if (!('IntersectionObserver' in window)) return;
+    var obs = new IntersectionObserver(function(es) { es.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('is-visible'); obs.unobserve(e.target); } }); }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
+  })();
+
+  // Contact form — progressive enhancement
+  (function() {
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    var btn = document.getElementById('contact-submit');
+    var status = document.getElementById('contact-status');
+    var fallback = document.getElementById('contact-fallback');
+
+    function setStatus(text, color) {
+      if (!status) return;
+      status.textContent = text;
+      status.style.color = color || 'var(--fg-soft)';
+    }
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+
+      var url = new URL(window.location.href);
+      if (url.searchParams.get('ok') === '1') {
+        url.searchParams.delete('ok');
+        history.replaceState(null, '', url.toString());
+      }
+
+      btn.disabled = true;
+      var originalLabel = btn.textContent;
+      btn.textContent = 'Enviando…';
+      setStatus('— Procesando envío', 'var(--fg-soft)');
+      fallback.style.display = 'none';
+
+      try {
+        var fd = new FormData(form);
+        var res = await fetch(form.action, {
+          method: 'POST',
+          body: fd,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          form.reset();
+          btn.textContent = 'Enviado ✓';
+          setStatus('— Mensaje recibido. Respondemos en 24h.', 'var(--state-ok)');
+          return;
+        }
+        if (res.status === 503) {
+          throw new Error('email-service-not-configured');
+        }
+        var data = {};
+        try { data = await res.json(); } catch (_) {}
+        throw new Error(data.error || ('http-' + res.status));
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+        setStatus('— No se pudo enviar. Intenta de nuevo o escribe directamente.', 'var(--state-err, #B91C1C)');
+        fallback.style.display = 'block';
+        console.warn('[contact-form]', err);
+      }
+    });
+
+    // Si el server-side redirige a ?ok=1 (sin JS), mostramos confirmación
+    if (new URL(window.location.href).searchParams.get('ok') === '1') {
+      form.reset();
+      btn.disabled = true;
+      btn.textContent = 'Enviado ✓';
+      setStatus('— Mensaje recibido. Respondemos en 24h.', 'var(--state-ok)');
+    }
+  })();
+</script>
+
+</body>
+</html>

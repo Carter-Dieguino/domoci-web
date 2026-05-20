@@ -1,0 +1,20 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Cloudflare
+.wrangler/
+.dev.vars
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
