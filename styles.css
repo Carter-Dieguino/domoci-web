@@ -1199,8 +1199,13 @@ hr { border: 0; height: 1px; background: var(--line); }
 
 
 /* ============================================================
-   Snap scroll cinematic + morph transitions (v2 — letterbox reveal)
+   Snap scroll + Morph cross-fade (v3 — PowerPoint Morph-inspired)
    Aplica solo cuando <body class="is-snap-page">
+
+   Key principles:
+   - Cada slide ocupa EXACTO 100dvh, jamás overflow ni scrollbar interno
+   - Contenido se reduce en tipografía para caber, no scroll interno
+   - Morph: cross-fade overlapping + sutil scale + persistence, sin blur ni clip-path
    ============================================================ */
 
 /* Snap aplicado a <html> via :has() — no rompe sticky header del body */
@@ -1210,156 +1215,146 @@ html:has(body.is-snap-page) {
   scroll-behavior: smooth;
 }
 
-/* Cada slide ocupa todo el viewport.
-   El header sticky (76px) NO debe tapar contenido → padding-top compensa.
-   Box-sizing border-box hace que el padding se descuente del min-height. */
+/* Cada slide es EXACTAMENTE viewport completo. No scrollbar interno. */
 body.is-snap-page main > section {
   scroll-snap-align: start;
   scroll-snap-stop: normal;
-  min-height: 100dvh;
-  padding-top: calc(var(--head-height) + var(--s-5));
-  padding-bottom: var(--s-7);
+  height: 100dvh;
+  max-height: 100dvh;
+  padding-top: calc(var(--head-height) + var(--s-4));
+  padding-bottom: var(--s-4);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  overflow: hidden;  /* contiene los efectos de clip-path */
+  overflow: hidden;
 }
 
-/* Hero ya tenía flexbox propio; mantén overflow visible para visual decorations */
-body.is-snap-page .hero {
-  padding-top: calc(var(--head-height) + var(--s-5));
-  padding-bottom: var(--s-7);
-}
-
-/* Strip (la barra fina de credibilidad) NO debe ser slide propia — colapsa con la siguiente */
+/* Strip de credibilidad: no es slide propia */
 body.is-snap-page .strip {
   scroll-snap-align: none;
+  height: auto;
   min-height: 0;
+  max-height: none;
   padding-block: var(--s-5);
   flex: 0 0 auto;
 }
 
-/* Footer snap-aligned, última slide */
+/* Footer slide-aligned con misma regla */
 body.is-snap-page .foot {
   scroll-snap-align: start;
   scroll-snap-stop: normal;
-  min-height: 100dvh;
-  padding-top: calc(var(--head-height) + var(--s-7));
-  padding-bottom: var(--s-7);
+  height: 100dvh;
+  max-height: 100dvh;
+  padding-top: calc(var(--head-height) + var(--s-5));
+  padding-bottom: var(--s-5);
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
 }
 
-/* Si el contenido excede el viewport, scroll interno suave dentro de la slide */
-body.is-snap-page main > section > .wrap {
+/* Wrap interno: SIN scroll bar nunca */
+body.is-snap-page main > section > .wrap,
+body.is-snap-page .foot > .wrap {
+  width: 100%;
+  overflow: visible;
   max-height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: thin;
-  scrollbar-color: var(--line-strong) transparent;
 }
-body.is-snap-page main > section > .wrap::-webkit-scrollbar { width: 6px; }
-body.is-snap-page main > section > .wrap::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 3px; }
+
+/* Compactar tipografía y spacing en snap slides para que TODO quepa */
+body.is-snap-page main > section .h1 {
+  font-size: clamp(38px, 5.2vw, 72px);
+  line-height: 1.04;
+}
+body.is-snap-page main > section .h2 {
+  font-size: clamp(28px, 3.4vw, 48px);
+  line-height: 1.08;
+}
+body.is-snap-page main > section .h3 {
+  font-size: clamp(20px, 1.8vw, 26px);
+}
+body.is-snap-page main > section .hero__lead,
+body.is-snap-page main > section .lead {
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.55;
+}
 
 /* =========================================================
-   MORPH v2 — Cinematic letterbox reveal con depth & focus
+   MORPH v3 — Cross-fade overlap (PowerPoint Morph-inspired)
+   Sin blur, sin clip-path, sin filtros agresivos.
+   Solo opacity + sutil scale, dando ilusión de "shape persistence"
+   y continuidad fluida entre slides.
    ========================================================= */
 @supports (animation-timeline: view()) {
 
-  /* La slide misma: clip-path reveal + scale + brightness/saturate sweep */
-  body.is-snap-page main > section {
-    animation: slide-cinematic-reveal linear both;
+  /* La slide entera: cross-fade con scale muy sutil */
+  body.is-snap-page main > section,
+  body.is-snap-page .foot {
+    animation:
+      morph-enter linear both,
+      morph-exit linear both;
+    animation-timeline: view(), view();
+    animation-range:
+      entry 0% cover 40%,
+      exit 50% exit 100%;
+  }
+
+  @keyframes morph-enter {
+    0%   { opacity: 0; transform: scale(0.985); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes morph-exit {
+    0%   { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(1.015); }
+  }
+
+  /* Content interno: smooth translateY (no blur) */
+  body.is-snap-page main > section > .wrap {
+    animation: content-morph linear both;
     animation-timeline: view();
     animation-range: entry 0% cover 35%;
   }
 
-  @keyframes slide-cinematic-reveal {
-    0% {
-      opacity: 0;
-      transform: scale(0.88) translateY(64px);
-      clip-path: inset(18% 4% 18% 4% round 32px);
-      filter: brightness(0.6) saturate(0.5) blur(2px);
-    }
-    50% {
-      opacity: 1;
-      clip-path: inset(6% 1.5% 6% 1.5% round 14px);
-      filter: brightness(0.9) saturate(0.9) blur(0);
-    }
-    100% {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-      clip-path: inset(0 0 0 0 round 0);
-      filter: brightness(1) saturate(1) blur(0);
-    }
-  }
-
-  /* El contenido (.wrap) se parallax-eea verticalmente respecto a su slide */
-  body.is-snap-page main > section > .wrap {
-    animation: slide-content-parallax linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 50%;
-  }
-
-  @keyframes slide-content-parallax {
-    0%   { opacity: 0; transform: translateY(80px); }
-    60%  { opacity: 1; }
+  @keyframes content-morph {
+    0%   { opacity: 0; transform: translateY(24px); }
     100% { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Exit: la slide saliente se va con leve fade + push hacia arriba */
-  body.is-snap-page main > section {
-    animation:
-      slide-cinematic-reveal linear both,
-      slide-cinematic-exit linear both;
-    animation-timeline: view(), view();
-    animation-range: entry 0% cover 35%, exit 30% exit 100%;
-  }
-
-  @keyframes slide-cinematic-exit {
-    0%   { transform: scale(1) translateY(0); filter: brightness(1); }
-    100% { transform: scale(0.94) translateY(-32px); filter: brightness(0.5) saturate(0.6); opacity: 0.35; }
-  }
-
-  /* Footer: morph propio más sobrio */
-  body.is-snap-page .foot {
-    animation: slide-cinematic-reveal linear both;
-    animation-timeline: view();
-    animation-range: entry 0% cover 30%;
   }
 }
 
-/* Fallback para browsers sin scroll-driven animations */
+/* Fallback */
 @supports not (animation-timeline: view()) {
   body.is-snap-page main > section {
     transition:
-      opacity 700ms var(--ease-out),
-      transform 700ms var(--ease-out),
-      filter 700ms var(--ease-out);
+      opacity 600ms var(--ease-out),
+      transform 600ms var(--ease-out);
   }
 }
 
-/* Mobile: snap proximity (más suave con address bar dinámica) */
+/* Mobile: snap proximity (address bar friendly) */
 @media (max-width: 768px) {
   html:has(body.is-snap-page) {
     scroll-snap-type: y proximity;
   }
   body.is-snap-page main > section {
-    padding-top: calc(var(--head-height) + var(--s-4));
-    padding-bottom: var(--s-5);
+    padding-top: calc(var(--head-height) + var(--s-3));
+    padding-bottom: var(--s-3);
   }
+  body.is-snap-page main > section .h1 { font-size: clamp(32px, 8vw, 44px); }
+  body.is-snap-page main > section .h2 { font-size: clamp(24px, 6vw, 32px); }
 }
 
-/* prefers-reduced-motion: sin animaciones ni snap */
+/* prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
   html:has(body.is-snap-page) {
     scroll-snap-type: none;
     scroll-behavior: auto;
   }
-  body.is-snap-page main > section {
+  body.is-snap-page main > section,
+  body.is-snap-page .foot {
     animation: none;
   }
   body.is-snap-page main > section > .wrap {
@@ -1414,9 +1409,8 @@ body.is-snap-page main > section > .wrap::-webkit-scrollbar-thumb { background: 
   }
 
   @keyframes card-stagger-reveal {
-    0%   { opacity: 0; transform: translateY(56px) scale(0.94); filter: blur(8px); }
-    60%  { opacity: 1; }
-    100% { opacity: 1; transform: translateY(0)    scale(1);    filter: blur(0); }
+    0%   { opacity: 0; transform: translateY(28px); }
+    100% { opacity: 1; transform: translateY(0); }
   }
 
   body.is-snap-page .caps > .cap:nth-child(1),
