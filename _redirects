@@ -1,6 +1,0 @@
-# Cloudflare Pages — redirects
-# https://developers.cloudflare.com/pages/configuration/redirects/
-
-# Canonical: www.domoci.com.mx
-# Apex domoci.com.mx → 301 → www.domoci.com.mx
-https://domoci.com.mx/* https://www.domoci.com.mx/:splat 301
