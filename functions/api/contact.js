@@ -5,7 +5,7 @@
 //
 // Configuración requerida (Pages > Settings > Environment variables):
 //   RESEND_API_KEY     (encrypted) — API key de Resend.
-//   CONTACT_TO         (plain)     — destinatario, ej: contacto@domoci.com.mx
+//   CONTACT_TO         (plain)     — destinatario, ej: domo.consulinte@gmail.com
 //   CONTACT_FROM       (plain)     — remitente verificado en Resend.
 //                                    Mientras no exista dominio verificado:
 //                                    "DOMO <onboarding@resend.dev>"
@@ -84,7 +84,7 @@ export async function onRequestPost({ request, env }) {
   }
 
   const apiKey = env.RESEND_API_KEY;
-  const toList = (env.CONTACT_TO || 'contacto@domoci.com.mx')
+  const toList = (env.CONTACT_TO || 'domo.consulinte@gmail.com')
     .split(',')
     .map((s) => s.trim())
     .filter(Boolean);

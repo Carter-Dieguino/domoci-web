@@ -84,17 +84,17 @@ Configurar desde el dashboard CF Pages → Settings → Environment variables (p
 | Variable | Tipo | Valor |
 |---|---|---|
 | `RESEND_API_KEY` | Encrypted | API key de https://resend.com |
-| `CONTACT_TO` | Plain | `contacto@domoci.com.mx` |
+| `CONTACT_TO` | Plain | `domo.consulinte@gmail.com` |
 | `CONTACT_FROM` | Plain | `DOMO <onboarding@resend.dev>` (sandbox) o `DOMO <noreply@domoci.com.mx>` (cuando se valide dominio en Resend) |
 
 O vía CLI:
 
 ```bash
 wrangler pages secret put RESEND_API_KEY --project-name=domoci-web
-echo "contacto@domoci.com.mx" | wrangler pages secret put CONTACT_TO --project-name=domoci-web
+echo "domo.consulinte@gmail.com" | wrangler pages secret put CONTACT_TO --project-name=domoci-web
 ```
 
-Si `RESEND_API_KEY` no existe, `/api/contact` devuelve **503** y el form muestra el fallback "escribe directamente a contacto@domoci.com.mx".
+Si `RESEND_API_KEY` no existe, `/api/contact` devuelve **503** y el form muestra el fallback "escribe directamente a domo.consulinte@gmail.com".
 
 ## Form de contacto
 
@@ -139,7 +139,7 @@ Abrir http://localhost:4173 y verificar:
 - **RFC:** DCI050221NF8
 - **Constituida:** 21-feb-2005
 - **Sede:** Camino a San José 115, Xalapa, Veracruz, CP 91098
-- **Contacto:** contacto@domoci.com.mx · +52 228 104 4773
+- **Contacto:** domo.consulinte@gmail.com · +52 228 104 4773
 
 ## Licencia
 
