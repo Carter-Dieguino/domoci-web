@@ -84,14 +84,17 @@ export async function onRequestPost({ request, env }) {
   }
 
   const apiKey = env.RESEND_API_KEY;
-  const to = env.CONTACT_TO || 'contacto@domoci.com.mx';
+  const toList = (env.CONTACT_TO || 'contacto@domoci.com.mx')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
   const from = env.CONTACT_FROM || 'DOMO <onboarding@resend.dev>';
 
   if (!apiKey) {
     return jsonResponse(503, {
       ok: false,
       error: 'email-service-not-configured',
-      hint: `Escribe directamente a ${to}`,
+      hint: `Escribe directamente a ${toList[0]}`,
     });
   }
 
@@ -147,7 +150,7 @@ export async function onRequestPost({ request, env }) {
       },
       body: JSON.stringify({
         from,
-        to: [to],
+        to: toList,
         reply_to: data.email,
         subject,
         text,
