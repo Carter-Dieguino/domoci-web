@@ -1306,6 +1306,21 @@ body.is-snap-page main > section .lead {
   line-height: 1.55;
 }
 
+/* Content-heavy slides (team, tech-grid): permitir altura variable
+   sin truncar contenido. Mantiene snap-align al inicio. */
+body.is-snap-page main > section:has(.team),
+body.is-snap-page main > section:has(.tech-grid) {
+  height: auto;
+  max-height: none;
+  overflow: visible;
+}
+
+/* Team card más compacto en snap mode: portrait cuadrado, body apretado */
+body.is-snap-page .team-card__portrait { aspect-ratio: 1/1; }
+body.is-snap-page .team-card__body { padding: var(--s-4); }
+body.is-snap-page .team-card__name { font-size: 17px; }
+body.is-snap-page .team-card__bio { font-size: 12px; line-height: 1.5; }
+
 /* =========================================================
    MORPH v3 — Cross-fade overlap (PowerPoint Morph-inspired)
    Sin blur, sin clip-path, sin filtros agresivos.
