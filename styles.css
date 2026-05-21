@@ -546,9 +546,19 @@ hr { border: 0; height: 1px; background: var(--line); }
   border: 1px solid var(--line-strong);
   background: var(--surface);
   display: flex; align-items: center; justify-content: center;
-  padding: var(--s-7);
+  padding: 0;
+  overflow: hidden;
 }
-.featured__visual img { max-width: 80%; max-height: 80%; }
+.featured__visual picture,
+.featured__visual img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.featured__visual img {
+  object-fit: cover;
+  object-position: center;
+}
 .featured__copy h2 { margin-bottom: var(--s-4); }
 .featured__copy p { margin-bottom: var(--s-5); }
 
@@ -942,6 +952,7 @@ hr { border: 0; height: 1px; background: var(--line); }
 .service__visual--duotone img {
   mix-blend-mode: luminosity;
   filter: grayscale(1) contrast(1.05);
+  object-position: left center;
 }
 .service__visual--brand img {
   filter: sepia(0.5) hue-rotate(70deg) saturate(0.85) contrast(1);
