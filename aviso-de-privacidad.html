@@ -13,14 +13,14 @@
 <meta property="og:locale" content="es_MX" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,400..700,0..100&family=JetBrains+Mono:wght@300..700&family=Manrope:wght@300..700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="./styles.css" />
 <link rel="icon" type="image/x-icon" href="./favicon.ico" />
 <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png" />
 <link rel="manifest" href="./manifest.webmanifest" />
-<meta name="theme-color" content="#0F5132" />
+<meta name="theme-color" content="#eff0f2" />
 <meta property="og:image" content="https://www.domoci.com.mx/og-default.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
@@ -210,13 +210,11 @@
 <script>
   (function() {
     var btn = document.getElementById('themeToggle'); var root = document.documentElement;
-    var stored = localStorage.getItem('domo-theme');
-    if (stored) root.setAttribute('data-theme', stored);
+    if (localStorage.getItem('domo-theme') === 'dark') root.setAttribute('data-theme', 'dark');
     btn && btn.addEventListener('click', function() {
-      var c = root.getAttribute('data-theme');
-      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var n = !c ? (prefersDark ? 'light' : 'dark') : (c === 'dark' ? 'light' : 'dark');
-      root.setAttribute('data-theme', n); localStorage.setItem('domo-theme', n);
+      var n = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      if (n === 'dark') root.setAttribute('data-theme', 'dark'); else root.removeAttribute('data-theme');
+      localStorage.setItem('domo-theme', n);
     });
   })();
   (function() {
@@ -225,6 +223,8 @@
     document.querySelectorAll('.fade-in').forEach(function(el) { obs.observe(el); });
   })();
 </script>
+
+<script src="./anims.js" defer></script>
 
 </body>
 </html>
