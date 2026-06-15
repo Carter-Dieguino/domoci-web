@@ -136,7 +136,7 @@
 
 /* ===== Reset ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   font-family: var(--sans);
   font-weight: 400;
@@ -262,12 +262,64 @@ img, svg, picture { display: block; max-width: 100%; }
 .head__tools { display: flex; align-items: center; gap: var(--s-3); }
 .head__tools .btn-cta { white-space: nowrap; }
 
+/* Botón hamburguesa — solo móvil */
+.nav-toggle {
+  display: none;
+  width: 36px; height: 36px;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  border-radius: 9px;
+  color: var(--text-mid);
+  cursor: pointer;
+  place-items: center;
+  transition: background var(--motion-normal) var(--ease-out), color var(--motion-normal) var(--ease-out);
+}
+.nav-toggle:hover { background: var(--surface-hover); color: var(--text); }
+.nav-toggle svg { width: 18px; height: 18px; }
+.nav-toggle .ic-close { display: none; }
+.head.menu-open .nav-toggle .ic-open { display: none; }
+.head.menu-open .nav-toggle .ic-close { display: block; }
+
 @media (max-width: 1100px) {
   .head__brand-sub { display: none; }
 }
 @media (max-width: 920px) {
-  .head__nav { display: none; }
+  .nav-toggle { display: grid; }
   .head__row { grid-template-columns: auto auto; justify-content: space-between; }
+  /* La CTA "Hablemos" se mueve al menú desplegable para ganar espacio */
+  .head__tools .btn-cta { display: none; }
+  /* Nav → panel desplegable glass anclado bajo el header */
+  .head__nav {
+    position: fixed; left: 0; right: 0; top: var(--head-height);
+    z-index: 190;
+    flex-direction: column; align-items: stretch; justify-content: flex-start;
+    gap: 2px;
+    padding: var(--s-3) var(--gutter) var(--s-5);
+    background: rgba(var(--canvas-rgb), 1);
+    border-bottom: 1px solid var(--border-strong);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-10px);
+    opacity: 0; visibility: hidden;
+    transition: opacity var(--dur-ui) var(--ease-out), transform var(--dur-ui) var(--ease-out), visibility var(--dur-ui);
+  }
+  .head.menu-open .head__nav { transform: none; opacity: 1; visibility: visible; }
+  .head__nav a {
+    width: 100%; padding: 13px 6px; font-size: 15px;
+    border-bottom: 1px solid var(--border);
+  }
+  .head__nav a.is-active::after { display: none; }
+  .head__nav a.is-active { color: var(--text); }
+  /* CTA dentro del menú en móvil — botón sólido full-width */
+  .head__nav .nav-cta {
+    margin-top: var(--s-4);
+    justify-content: center;
+    padding: 13px 18px;
+    font-size: 14px;
+    border-bottom: 0;
+  }
+}
+@media (min-width: 921px) {
+  .head__nav .nav-cta { display: none; }
 }
 
 .theme-btn {
@@ -1290,6 +1342,35 @@ main > section:not(.hero):not(.sec) { padding-block: clamp(72px, 9vw, 120px); }
   .foot__top { grid-template-columns: 1fr; gap: var(--s-5); }
   .foot__bottom { flex-direction: column; align-items: flex-start; }
 }
+
+/* ============================================================
+   Encuadre de imágenes — object-position por foto + diagramas contain
+   ============================================================ */
+/* FIX raíz: el <picture> que envuelve cada <img> no tenía altura, así que
+   `height:100%` del img no resolvía y la imagen desbordaba el contenedor
+   (se veía solo la parte superior, p.ej. el techo). Hacemos que el picture
+   llene el contenedor para que object-fit/object-position funcionen. */
+.hero__visual picture,
+.featured__visual picture,
+.service__visual picture,
+.team-card__portrait picture { display: block; width: 100%; height: 100%; }
+
+/* Foto vertical (gente en oficina): el sujeto vive en la mitad baja */
+.service__visual img[src*="servicios-hero"] { object-position: center 74%; }
+/* Screenshot del tablero: anclar arriba para mostrar el header */
+.service__visual img[src*="servicios-infraestructura"] { object-position: center top; }
+/* Foto del equipo en taller: caras en el tercio superior */
+.hero__visual img[src*="nosotros-hero"] { object-position: center 32%; }
+/* Hero Agrocolectiva (screenshot casi cuadrado): mostrar desde arriba */
+.hero__visual img[src*="agrocolectiva-hero"] { object-position: center top; }
+.featured__visual img[src*="inicio-censos"] { object-position: center 42%; }
+
+/* Diagramas / infografías: mostrar completos (contain), no recortar */
+.service__visual--viz {
+  background: var(--surface);
+  display: grid; place-items: center;
+}
+.service__visual--viz img { object-fit: contain; padding: var(--s-4); }
 
 /* ============================================================
    Hairline de progreso + movimiento

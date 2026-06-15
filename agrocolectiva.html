@@ -41,14 +41,19 @@
         <span class="head__brand-sub">Consultoría · S.C.</span>
       </span>
     </a>
-    <nav class="head__nav" aria-label="Navegación principal">
+    <nav class="head__nav" id="primaryNav" aria-label="Navegación principal">
       <a href="./index.html">Inicio</a>
       <a href="./nosotros.html">Nosotros</a>
       <a href="./servicios.html">Servicios</a>
       <a href="./agrocolectiva.html" class="is-active">Agrocolectiva</a>
       <a href="./contacto.html">Contacto</a>
+      <a class="btn-cta nav-cta" href="./contacto.html">Hablemos →</a>
     </nav>
     <div class="head__tools">
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="primaryNav">
+        <svg class="ic-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <svg class="ic-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
       <a class="btn-cta" href="./contacto.html">Hablemos →</a>
       <button class="theme-btn" id="themeToggle" aria-label="Cambiar tema">
         <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -336,5 +341,17 @@
 
 <script src="./anims.js" defer></script>
 
+<script>
+  // Menú móvil (hamburguesa)
+  (function(){
+    var head=document.querySelector('.head');
+    var btn=document.getElementById('navToggle');
+    if(!head||!btn) return;
+    function setOpen(o){head.classList.toggle('menu-open',o);btn.setAttribute('aria-expanded',o?'true':'false');btn.setAttribute('aria-label',o?'Cerrar menú':'Abrir menú');}
+    btn.addEventListener('click',function(){setOpen(!head.classList.contains('menu-open'));});
+    document.querySelectorAll('.head__nav a').forEach(function(a){a.addEventListener('click',function(){setOpen(false);});});
+    window.addEventListener('resize',function(){if(window.innerWidth>920)setOpen(false);});
+  })();
+</script>
 </body>
 </html>
