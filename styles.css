@@ -262,6 +262,11 @@ img, svg, picture { display: block; max-width: 100%; }
 .head__tools { display: flex; align-items: center; gap: var(--s-3); }
 .head__tools .btn-cta { white-space: nowrap; }
 
+/* CTA duplicado del menú móvil: oculto por defecto en TODOS los anchos.
+   Solo se muestra dentro del panel desplegable en móvil (≤920px). Blindado
+   con !important para que ningún CSS cacheado/antiguo lo filtre en desktop. */
+.nav-cta { display: none !important; }
+
 /* Botón hamburguesa — solo móvil */
 .nav-toggle {
   display: none;
@@ -309,17 +314,20 @@ img, svg, picture { display: block; max-width: 100%; }
   }
   .head__nav a.is-active::after { display: none; }
   .head__nav a.is-active { color: var(--text); }
-  /* CTA dentro del menú en móvil — botón sólido full-width */
-  .head__nav .nav-cta {
+  /* CTA dentro del menú en móvil — botón sólido full-width. Solo visible
+     cuando el panel está abierto (.head.menu-open) para que no aparezca
+     suelto al cargar en móvil. */
+  .head.menu-open .head__nav .nav-cta {
+    display: inline-flex !important;
+    /* color del CTA (tinta invertida) — gana a la regla .head__nav a que
+       pinta los links oscuros, evitando texto oscuro sobre botón oscuro. */
+    color: var(--cta-fg);
     margin-top: var(--s-4);
     justify-content: center;
     padding: 13px 18px;
     font-size: 14px;
     border-bottom: 0;
   }
-}
-@media (min-width: 921px) {
-  .head__nav .nav-cta { display: none; }
 }
 
 .theme-btn {
